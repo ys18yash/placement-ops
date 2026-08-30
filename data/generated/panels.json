@@ -1,0 +1,1337 @@
+[
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP001",
+    "id": "PANEL-COMP001-01",
+    "name": "Nimbus Cloud Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP001",
+    "id": "PANEL-COMP001-02",
+    "name": "Nimbus Cloud Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP001",
+    "id": "PANEL-COMP001-03",
+    "name": "Nimbus Cloud Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP001",
+    "id": "PANEL-COMP001-04",
+    "name": "Nimbus Cloud Panel 4",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP002",
+    "id": "PANEL-COMP002-01",
+    "name": "BrightScale AI Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP002",
+    "id": "PANEL-COMP002-02",
+    "name": "BrightScale AI Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP002",
+    "id": "PANEL-COMP002-03",
+    "name": "BrightScale AI Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP003",
+    "id": "PANEL-COMP003-01",
+    "name": "VectorSoft Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP003",
+    "id": "PANEL-COMP003-02",
+    "name": "VectorSoft Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP003",
+    "id": "PANEL-COMP003-03",
+    "name": "VectorSoft Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP004",
+    "id": "PANEL-COMP004-01",
+    "name": "QuantumEdge Analytics Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP004",
+    "id": "PANEL-COMP004-02",
+    "name": "QuantumEdge Analytics Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP004",
+    "id": "PANEL-COMP004-03",
+    "name": "QuantumEdge Analytics Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP005",
+    "id": "PANEL-COMP005-01",
+    "name": "Nova Payments Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP005",
+    "id": "PANEL-COMP005-02",
+    "name": "Nova Payments Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP005",
+    "id": "PANEL-COMP005-03",
+    "name": "Nova Payments Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP006",
+    "id": "PANEL-COMP006-01",
+    "name": "Apex Fintech Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP006",
+    "id": "PANEL-COMP006-02",
+    "name": "Apex Fintech Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP006",
+    "id": "PANEL-COMP006-03",
+    "name": "Apex Fintech Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP007",
+    "id": "PANEL-COMP007-01",
+    "name": "Clearline SaaS Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP007",
+    "id": "PANEL-COMP007-02",
+    "name": "Clearline SaaS Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP007",
+    "id": "PANEL-COMP007-03",
+    "name": "Clearline SaaS Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP008",
+    "id": "PANEL-COMP008-01",
+    "name": "Pulse Commerce Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP008",
+    "id": "PANEL-COMP008-02",
+    "name": "Pulse Commerce Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP008",
+    "id": "PANEL-COMP008-03",
+    "name": "Pulse Commerce Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP009",
+    "id": "PANEL-COMP009-01",
+    "name": "Stellar Bank Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP009",
+    "id": "PANEL-COMP009-02",
+    "name": "Stellar Bank Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP009",
+    "id": "PANEL-COMP009-03",
+    "name": "Stellar Bank Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP010",
+    "id": "PANEL-COMP010-01",
+    "name": "BlueRiver Retail Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP010",
+    "id": "PANEL-COMP010-02",
+    "name": "BlueRiver Retail Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP010",
+    "id": "PANEL-COMP010-03",
+    "name": "BlueRiver Retail Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP011",
+    "id": "PANEL-COMP011-01",
+    "name": "Meridian Telecom Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP011",
+    "id": "PANEL-COMP011-02",
+    "name": "Meridian Telecom Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP012",
+    "id": "PANEL-COMP012-01",
+    "name": "Fusion Semiconductors Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP012",
+    "id": "PANEL-COMP012-02",
+    "name": "Fusion Semiconductors Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP013",
+    "id": "PANEL-COMP013-01",
+    "name": "Synapse Security Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP013",
+    "id": "PANEL-COMP013-02",
+    "name": "Synapse Security Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP013",
+    "id": "PANEL-COMP013-03",
+    "name": "Synapse Security Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP014",
+    "id": "PANEL-COMP014-01",
+    "name": "Vertex Labs Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP014",
+    "id": "PANEL-COMP014-02",
+    "name": "Vertex Labs Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP014",
+    "id": "PANEL-COMP014-03",
+    "name": "Vertex Labs Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP015",
+    "id": "PANEL-COMP015-01",
+    "name": "AccelData Systems Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP015",
+    "id": "PANEL-COMP015-02",
+    "name": "AccelData Systems Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP015",
+    "id": "PANEL-COMP015-03",
+    "name": "AccelData Systems Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP016",
+    "id": "PANEL-COMP016-01",
+    "name": "Helio Energy Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP016",
+    "id": "PANEL-COMP016-02",
+    "name": "Helio Energy Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP017",
+    "id": "PANEL-COMP017-01",
+    "name": "Kinetic Mobility Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP017",
+    "id": "PANEL-COMP017-02",
+    "name": "Kinetic Mobility Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP018",
+    "id": "PANEL-COMP018-01",
+    "name": "Orion Motors Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP018",
+    "id": "PANEL-COMP018-02",
+    "name": "Orion Motors Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP019",
+    "id": "PANEL-COMP019-01",
+    "name": "Granite Consulting Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP019",
+    "id": "PANEL-COMP019-02",
+    "name": "Granite Consulting Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP019",
+    "id": "PANEL-COMP019-03",
+    "name": "Granite Consulting Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP020",
+    "id": "PANEL-COMP020-01",
+    "name": "Northstar Logistics Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP020",
+    "id": "PANEL-COMP020-02",
+    "name": "Northstar Logistics Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP021",
+    "id": "PANEL-COMP021-01",
+    "name": "Cedar HealthTech Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP021",
+    "id": "PANEL-COMP021-02",
+    "name": "Cedar HealthTech Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP022",
+    "id": "PANEL-COMP022-01",
+    "name": "Prism Networks Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP022",
+    "id": "PANEL-COMP022-02",
+    "name": "Prism Networks Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP022",
+    "id": "PANEL-COMP022-03",
+    "name": "Prism Networks Panel 3",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP023",
+    "id": "PANEL-COMP023-01",
+    "name": "Beacon Insurance Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP023",
+    "id": "PANEL-COMP023-02",
+    "name": "Beacon Insurance Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP024",
+    "id": "PANEL-COMP024-01",
+    "name": "Maple ERP Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP024",
+    "id": "PANEL-COMP024-02",
+    "name": "Maple ERP Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP025",
+    "id": "PANEL-COMP025-01",
+    "name": "Horizon Media Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP025",
+    "id": "PANEL-COMP025-02",
+    "name": "Horizon Media Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP026",
+    "id": "PANEL-COMP026-01",
+    "name": "TerraGrid Infra Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP026",
+    "id": "PANEL-COMP026-02",
+    "name": "TerraGrid Infra Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP027",
+    "id": "PANEL-COMP027-01",
+    "name": "Elevate HRTech Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP027",
+    "id": "PANEL-COMP027-02",
+    "name": "Elevate HRTech Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP028",
+    "id": "PANEL-COMP028-01",
+    "name": "Zentra Devices Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP028",
+    "id": "PANEL-COMP028-02",
+    "name": "Zentra Devices Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP029",
+    "id": "PANEL-COMP029-01",
+    "name": "TruVista Pharma Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "company_id": "COMP029",
+    "id": "PANEL-COMP029-02",
+    "name": "TruVista Pharma Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP030",
+    "id": "PANEL-COMP030-01",
+    "name": "Delta Robotics Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP030",
+    "id": "PANEL-COMP030-02",
+    "name": "Delta Robotics Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP031",
+    "id": "PANEL-COMP031-01",
+    "name": "Argo Aerospace Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "09:30"
+      }
+    ],
+    "company_id": "COMP031",
+    "id": "PANEL-COMP031-02",
+    "name": "Argo Aerospace Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:00",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP032",
+    "id": "PANEL-COMP032-01",
+    "name": "Riverfront EPC Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:00",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP032",
+    "id": "PANEL-COMP032-02",
+    "name": "Riverfront EPC Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP033",
+    "id": "PANEL-COMP033-01",
+    "name": "Summit Foods Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP034",
+    "id": "PANEL-COMP034-01",
+    "name": "Ironclad Manufacturing Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP034",
+    "id": "PANEL-COMP034-02",
+    "name": "Ironclad Manufacturing Panel 2",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP035",
+    "id": "PANEL-COMP035-01",
+    "name": "DeepCore Mining Tech Panel 1",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "10:00"
+      }
+    ],
+    "company_id": "COMP035",
+    "id": "PANEL-COMP035-02",
+    "name": "DeepCore Mining Tech Panel 2",
+    "status": "AVAILABLE"
+  }
+]

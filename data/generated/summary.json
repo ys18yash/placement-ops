@@ -1,0 +1,1226 @@
+{
+  "average_shortlists": {
+    "average_shortlists_per_active_student": 1.107,
+    "average_shortlists_per_student": 1.074
+  },
+  "capacity": {
+    "panel_capacity_interviews_available": 1441,
+    "panel_capacity_minutes_available": 67170,
+    "panel_demand_capacity_ratio": 0.5871,
+    "room_capacity_minutes_available": 41970,
+    "room_capacity_minutes_total": 41970,
+    "room_demand_capacity_ratio": 0.9396,
+    "total_interview_duration_minutes": 39435
+  },
+  "cgpa_band_statistics": [
+    {
+      "average_shortlists": 0.01,
+      "band": "<6.5",
+      "median_shortlists": 0.0,
+      "student_count": 96,
+      "zero_shortlist_count": 95
+    },
+    {
+      "average_shortlists": 0.678,
+      "band": "6.5-7",
+      "median_shortlists": 1,
+      "student_count": 115,
+      "zero_shortlist_count": 39
+    },
+    {
+      "average_shortlists": 0.96,
+      "band": "7-7.5",
+      "median_shortlists": 1.0,
+      "student_count": 174,
+      "zero_shortlist_count": 27
+    },
+    {
+      "average_shortlists": 1.45,
+      "band": "7.5-8",
+      "median_shortlists": 1,
+      "student_count": 151,
+      "zero_shortlist_count": 10
+    },
+    {
+      "average_shortlists": 1.424,
+      "band": "8-8.5",
+      "median_shortlists": 1,
+      "student_count": 139,
+      "zero_shortlist_count": 10
+    },
+    {
+      "average_shortlists": 1.625,
+      "band": "8.5-9",
+      "median_shortlists": 2.0,
+      "student_count": 88,
+      "zero_shortlist_count": 3
+    },
+    {
+      "average_shortlists": 1.432,
+      "band": "9+",
+      "median_shortlists": 1,
+      "student_count": 37,
+      "zero_shortlist_count": 3
+    }
+  ],
+  "cgpa_shortlist_correlation": {
+    "active_students": 0.5829,
+    "all_students": 0.5717
+  },
+  "cgpa_statistics": {
+    "max": 9.72,
+    "mean": 7.557,
+    "median": 7.55,
+    "min": 5.0,
+    "stdev": 0.865
+  },
+  "company_popularity": [
+    {
+      "available_panel_count": 4,
+      "company_id": "COMP001",
+      "company_name": "Nimbus Cloud",
+      "day_capacity_minutes": {
+        "DAY_1": 2130,
+        "DAY_2": 2070
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 93,
+      "panel_capacity_minutes": 4200,
+      "panel_count": 4,
+      "placement_days": [
+        "DAY_1",
+        "DAY_2"
+      ],
+      "popularity_score": 99,
+      "priority_tier": "P1",
+      "shortlist_count": 70
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP005",
+      "company_name": "Nova Payments",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_2": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 70,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_2"
+      ],
+      "popularity_score": 94,
+      "priority_tier": "P1",
+      "shortlist_count": 50
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP002",
+      "company_name": "BrightScale AI",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_2": 1560
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 52,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_2"
+      ],
+      "popularity_score": 94,
+      "priority_tier": "P1",
+      "shortlist_count": 37
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP004",
+      "company_name": "QuantumEdge Analytics",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_4": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 70,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_4"
+      ],
+      "popularity_score": 92,
+      "priority_tier": "P1",
+      "shortlist_count": 51
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP003",
+      "company_name": "VectorSoft",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_4": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 70,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_4"
+      ],
+      "popularity_score": 92,
+      "priority_tier": "P1",
+      "shortlist_count": 49
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP006",
+      "company_name": "Apex Fintech",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_4": 1560
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 52,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_4"
+      ],
+      "popularity_score": 92,
+      "priority_tier": "P1",
+      "shortlist_count": 36
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP007",
+      "company_name": "Clearline SaaS",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_3": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 70,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_3"
+      ],
+      "popularity_score": 89,
+      "priority_tier": "P1",
+      "shortlist_count": 49
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP009",
+      "company_name": "Stellar Bank",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_2": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 70,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_2"
+      ],
+      "popularity_score": 88,
+      "priority_tier": "P1",
+      "shortlist_count": 47
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP008",
+      "company_name": "Pulse Commerce",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_3": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 70,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_3"
+      ],
+      "popularity_score": 86,
+      "priority_tier": "P1",
+      "shortlist_count": 49
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP010",
+      "company_name": "BlueRiver Retail",
+      "day_capacity_minutes": {
+        "DAY_1": 1590,
+        "DAY_4": 1560
+      },
+      "interview_duration_minutes": 30,
+      "panel_capacity_interviews": 105,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_4"
+      ],
+      "popularity_score": 81,
+      "priority_tier": "P2",
+      "shortlist_count": 71
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP013",
+      "company_name": "Synapse Security",
+      "day_capacity_minutes": {
+        "DAY_2": 1590,
+        "DAY_4": 1560
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 52,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_2",
+        "DAY_4"
+      ],
+      "popularity_score": 81,
+      "priority_tier": "P2",
+      "shortlist_count": 29
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP011",
+      "company_name": "Meridian Telecom",
+      "day_capacity_minutes": {
+        "DAY_3": 1050
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 23,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_3"
+      ],
+      "popularity_score": 81,
+      "priority_tier": "P2",
+      "shortlist_count": 12
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP012",
+      "company_name": "Fusion Semiconductors",
+      "day_capacity_minutes": {
+        "DAY_4": 1050
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 17,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 80,
+      "priority_tier": "P2",
+      "shortlist_count": 9
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP015",
+      "company_name": "AccelData Systems",
+      "day_capacity_minutes": {
+        "DAY_2": 1590,
+        "DAY_3": 1560
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 52,
+      "panel_capacity_minutes": 3150,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_2",
+        "DAY_3"
+      ],
+      "popularity_score": 79,
+      "priority_tier": "P2",
+      "shortlist_count": 26
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP014",
+      "company_name": "Vertex Labs",
+      "day_capacity_minutes": {
+        "DAY_3": 1500,
+        "DAY_4": 1560
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 68,
+      "panel_capacity_minutes": 3060,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_3",
+        "DAY_4"
+      ],
+      "popularity_score": 78,
+      "priority_tier": "P2",
+      "shortlist_count": 38
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP018",
+      "company_name": "Orion Motors",
+      "day_capacity_minutes": {
+        "DAY_4": 1050
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 23,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 72,
+      "priority_tier": "P2",
+      "shortlist_count": 11
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP016",
+      "company_name": "Helio Energy",
+      "day_capacity_minutes": {
+        "DAY_3": 1050
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 17,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_3"
+      ],
+      "popularity_score": 69,
+      "priority_tier": "P3",
+      "shortlist_count": 8
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP020",
+      "company_name": "Northstar Logistics",
+      "day_capacity_minutes": {
+        "DAY_1": 960
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 21,
+      "panel_capacity_minutes": 960,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_1"
+      ],
+      "popularity_score": 68,
+      "priority_tier": "P3",
+      "shortlist_count": 12
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP017",
+      "company_name": "Kinetic Mobility",
+      "day_capacity_minutes": {
+        "DAY_3": 1050
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 23,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_3"
+      ],
+      "popularity_score": 68,
+      "priority_tier": "P3",
+      "shortlist_count": 11
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP019",
+      "company_name": "Granite Consulting",
+      "day_capacity_minutes": {
+        "DAY_1": 1530,
+        "DAY_4": 1440
+      },
+      "interview_duration_minutes": 30,
+      "panel_capacity_interviews": 99,
+      "panel_capacity_minutes": 2970,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_1",
+        "DAY_4"
+      ],
+      "popularity_score": 66,
+      "priority_tier": "P3",
+      "shortlist_count": 56
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP021",
+      "company_name": "Cedar HealthTech",
+      "day_capacity_minutes": {
+        "DAY_4": 1020
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 17,
+      "panel_capacity_minutes": 1020,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 66,
+      "priority_tier": "P3",
+      "shortlist_count": 7
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP024",
+      "company_name": "Maple ERP",
+      "day_capacity_minutes": {
+        "DAY_4": 1050
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 23,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 65,
+      "priority_tier": "P3",
+      "shortlist_count": 10
+    },
+    {
+      "available_panel_count": 3,
+      "company_id": "COMP022",
+      "company_name": "Prism Networks",
+      "day_capacity_minutes": {
+        "DAY_2": 1500,
+        "DAY_4": 1500
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 50,
+      "panel_capacity_minutes": 3000,
+      "panel_count": 3,
+      "placement_days": [
+        "DAY_2",
+        "DAY_4"
+      ],
+      "popularity_score": 64,
+      "priority_tier": "P3",
+      "shortlist_count": 24
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP023",
+      "company_name": "Beacon Insurance",
+      "day_capacity_minutes": {
+        "DAY_4": 990
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 22,
+      "panel_capacity_minutes": 990,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 62,
+      "priority_tier": "P3",
+      "shortlist_count": 9
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP026",
+      "company_name": "TerraGrid Infra",
+      "day_capacity_minutes": {
+        "DAY_4": 990
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 16,
+      "panel_capacity_minutes": 990,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 60,
+      "priority_tier": "P3",
+      "shortlist_count": 6
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP025",
+      "company_name": "Horizon Media",
+      "day_capacity_minutes": {
+        "DAY_4": 1050
+      },
+      "interview_duration_minutes": 30,
+      "panel_capacity_interviews": 35,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 58,
+      "priority_tier": "P3",
+      "shortlist_count": 15
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP027",
+      "company_name": "Elevate HRTech",
+      "day_capacity_minutes": {
+        "DAY_1": 1050
+      },
+      "interview_duration_minutes": 30,
+      "panel_capacity_interviews": 35,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_1"
+      ],
+      "popularity_score": 57,
+      "priority_tier": "P3",
+      "shortlist_count": 18
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP029",
+      "company_name": "TruVista Pharma",
+      "day_capacity_minutes": {
+        "DAY_4": 1050
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 23,
+      "panel_capacity_minutes": 1050,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 57,
+      "priority_tier": "P3",
+      "shortlist_count": 9
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP028",
+      "company_name": "Zentra Devices",
+      "day_capacity_minutes": {
+        "DAY_2": 900
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 15,
+      "panel_capacity_minutes": 900,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_2"
+      ],
+      "popularity_score": 55,
+      "priority_tier": "P4",
+      "shortlist_count": 6
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP030",
+      "company_name": "Delta Robotics",
+      "day_capacity_minutes": {
+        "DAY_3": 990
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 16,
+      "panel_capacity_minutes": 990,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_3"
+      ],
+      "popularity_score": 54,
+      "priority_tier": "P4",
+      "shortlist_count": 6
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP031",
+      "company_name": "Argo Aerospace",
+      "day_capacity_minutes": {
+        "DAY_1": 900
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 15,
+      "panel_capacity_minutes": 900,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_1"
+      ],
+      "popularity_score": 51,
+      "priority_tier": "P4",
+      "shortlist_count": 7
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP032",
+      "company_name": "Riverfront EPC",
+      "day_capacity_minutes": {
+        "DAY_3": 840
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 18,
+      "panel_capacity_minutes": 840,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_3"
+      ],
+      "popularity_score": 48,
+      "priority_tier": "P4",
+      "shortlist_count": 7
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP034",
+      "company_name": "Ironclad Manufacturing",
+      "day_capacity_minutes": {
+        "DAY_1": 840
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 14,
+      "panel_capacity_minutes": 840,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_1"
+      ],
+      "popularity_score": 45,
+      "priority_tier": "P4",
+      "shortlist_count": 6
+    },
+    {
+      "available_panel_count": 2,
+      "company_id": "COMP035",
+      "company_name": "DeepCore Mining Tech",
+      "day_capacity_minutes": {
+        "DAY_3": 930
+      },
+      "interview_duration_minutes": 60,
+      "panel_capacity_interviews": 15,
+      "panel_capacity_minutes": 930,
+      "panel_count": 2,
+      "placement_days": [
+        "DAY_3"
+      ],
+      "popularity_score": 44,
+      "priority_tier": "P4",
+      "shortlist_count": 5
+    },
+    {
+      "available_panel_count": 1,
+      "company_id": "COMP033",
+      "company_name": "Summit Foods",
+      "day_capacity_minutes": {
+        "DAY_4": 480
+      },
+      "interview_duration_minutes": 45,
+      "panel_capacity_interviews": 10,
+      "panel_capacity_minutes": 480,
+      "panel_count": 1,
+      "placement_days": [
+        "DAY_4"
+      ],
+      "popularity_score": 43,
+      "priority_tier": "P4",
+      "shortlist_count": 3
+    }
+  ],
+  "company_shortlist_statistics": {
+    "bottom_10_by_shortlists": [
+      {
+        "available_panel_count": 1,
+        "company_id": "COMP033",
+        "company_name": "Summit Foods",
+        "day_capacity_minutes": {
+          "DAY_4": 480
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 10,
+        "panel_capacity_minutes": 480,
+        "panel_count": 1,
+        "placement_days": [
+          "DAY_4"
+        ],
+        "popularity_score": 43,
+        "priority_tier": "P4",
+        "shortlist_count": 3
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP035",
+        "company_name": "DeepCore Mining Tech",
+        "day_capacity_minutes": {
+          "DAY_3": 930
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 15,
+        "panel_capacity_minutes": 930,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_3"
+        ],
+        "popularity_score": 44,
+        "priority_tier": "P4",
+        "shortlist_count": 5
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP034",
+        "company_name": "Ironclad Manufacturing",
+        "day_capacity_minutes": {
+          "DAY_1": 840
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 14,
+        "panel_capacity_minutes": 840,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_1"
+        ],
+        "popularity_score": 45,
+        "priority_tier": "P4",
+        "shortlist_count": 6
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP030",
+        "company_name": "Delta Robotics",
+        "day_capacity_minutes": {
+          "DAY_3": 990
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 16,
+        "panel_capacity_minutes": 990,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_3"
+        ],
+        "popularity_score": 54,
+        "priority_tier": "P4",
+        "shortlist_count": 6
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP028",
+        "company_name": "Zentra Devices",
+        "day_capacity_minutes": {
+          "DAY_2": 900
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 15,
+        "panel_capacity_minutes": 900,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_2"
+        ],
+        "popularity_score": 55,
+        "priority_tier": "P4",
+        "shortlist_count": 6
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP026",
+        "company_name": "TerraGrid Infra",
+        "day_capacity_minutes": {
+          "DAY_4": 990
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 16,
+        "panel_capacity_minutes": 990,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_4"
+        ],
+        "popularity_score": 60,
+        "priority_tier": "P3",
+        "shortlist_count": 6
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP032",
+        "company_name": "Riverfront EPC",
+        "day_capacity_minutes": {
+          "DAY_3": 840
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 18,
+        "panel_capacity_minutes": 840,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_3"
+        ],
+        "popularity_score": 48,
+        "priority_tier": "P4",
+        "shortlist_count": 7
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP031",
+        "company_name": "Argo Aerospace",
+        "day_capacity_minutes": {
+          "DAY_1": 900
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 15,
+        "panel_capacity_minutes": 900,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_1"
+        ],
+        "popularity_score": 51,
+        "priority_tier": "P4",
+        "shortlist_count": 7
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP021",
+        "company_name": "Cedar HealthTech",
+        "day_capacity_minutes": {
+          "DAY_4": 1020
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 17,
+        "panel_capacity_minutes": 1020,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_4"
+        ],
+        "popularity_score": 66,
+        "priority_tier": "P3",
+        "shortlist_count": 7
+      },
+      {
+        "available_panel_count": 2,
+        "company_id": "COMP016",
+        "company_name": "Helio Energy",
+        "day_capacity_minutes": {
+          "DAY_3": 1050
+        },
+        "interview_duration_minutes": 60,
+        "panel_capacity_interviews": 17,
+        "panel_capacity_minutes": 1050,
+        "panel_count": 2,
+        "placement_days": [
+          "DAY_3"
+        ],
+        "popularity_score": 69,
+        "priority_tier": "P3",
+        "shortlist_count": 8
+      }
+    ],
+    "shortlists_per_company": {
+      "AccelData Systems": 26,
+      "Apex Fintech": 36,
+      "Argo Aerospace": 7,
+      "Beacon Insurance": 9,
+      "BlueRiver Retail": 71,
+      "BrightScale AI": 37,
+      "Cedar HealthTech": 7,
+      "Clearline SaaS": 49,
+      "DeepCore Mining Tech": 5,
+      "Delta Robotics": 6,
+      "Elevate HRTech": 18,
+      "Fusion Semiconductors": 9,
+      "Granite Consulting": 56,
+      "Helio Energy": 8,
+      "Horizon Media": 15,
+      "Ironclad Manufacturing": 6,
+      "Kinetic Mobility": 11,
+      "Maple ERP": 10,
+      "Meridian Telecom": 12,
+      "Nimbus Cloud": 70,
+      "Northstar Logistics": 12,
+      "Nova Payments": 50,
+      "Orion Motors": 11,
+      "Prism Networks": 24,
+      "Pulse Commerce": 49,
+      "QuantumEdge Analytics": 51,
+      "Riverfront EPC": 7,
+      "Stellar Bank": 47,
+      "Summit Foods": 3,
+      "Synapse Security": 29,
+      "TerraGrid Infra": 6,
+      "TruVista Pharma": 9,
+      "VectorSoft": 49,
+      "Vertex Labs": 38,
+      "Zentra Devices": 6
+    },
+    "top_10_by_shortlists": [
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP010",
+        "company_name": "BlueRiver Retail",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_4": 1560
+        },
+        "interview_duration_minutes": 30,
+        "panel_capacity_interviews": 105,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_4"
+        ],
+        "popularity_score": 81,
+        "priority_tier": "P2",
+        "shortlist_count": 71
+      },
+      {
+        "available_panel_count": 4,
+        "company_id": "COMP001",
+        "company_name": "Nimbus Cloud",
+        "day_capacity_minutes": {
+          "DAY_1": 2130,
+          "DAY_2": 2070
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 93,
+        "panel_capacity_minutes": 4200,
+        "panel_count": 4,
+        "placement_days": [
+          "DAY_1",
+          "DAY_2"
+        ],
+        "popularity_score": 99,
+        "priority_tier": "P1",
+        "shortlist_count": 70
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP019",
+        "company_name": "Granite Consulting",
+        "day_capacity_minutes": {
+          "DAY_1": 1530,
+          "DAY_4": 1440
+        },
+        "interview_duration_minutes": 30,
+        "panel_capacity_interviews": 99,
+        "panel_capacity_minutes": 2970,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_4"
+        ],
+        "popularity_score": 66,
+        "priority_tier": "P3",
+        "shortlist_count": 56
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP004",
+        "company_name": "QuantumEdge Analytics",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_4": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 70,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_4"
+        ],
+        "popularity_score": 92,
+        "priority_tier": "P1",
+        "shortlist_count": 51
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP005",
+        "company_name": "Nova Payments",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_2": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 70,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_2"
+        ],
+        "popularity_score": 94,
+        "priority_tier": "P1",
+        "shortlist_count": 50
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP003",
+        "company_name": "VectorSoft",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_4": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 70,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_4"
+        ],
+        "popularity_score": 92,
+        "priority_tier": "P1",
+        "shortlist_count": 49
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP007",
+        "company_name": "Clearline SaaS",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_3": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 70,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_3"
+        ],
+        "popularity_score": 89,
+        "priority_tier": "P1",
+        "shortlist_count": 49
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP008",
+        "company_name": "Pulse Commerce",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_3": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 70,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_3"
+        ],
+        "popularity_score": 86,
+        "priority_tier": "P1",
+        "shortlist_count": 49
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP009",
+        "company_name": "Stellar Bank",
+        "day_capacity_minutes": {
+          "DAY_1": 1590,
+          "DAY_2": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 70,
+        "panel_capacity_minutes": 3150,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_1",
+          "DAY_2"
+        ],
+        "popularity_score": 88,
+        "priority_tier": "P1",
+        "shortlist_count": 47
+      },
+      {
+        "available_panel_count": 3,
+        "company_id": "COMP014",
+        "company_name": "Vertex Labs",
+        "day_capacity_minutes": {
+          "DAY_3": 1500,
+          "DAY_4": 1560
+        },
+        "interview_duration_minutes": 45,
+        "panel_capacity_interviews": 68,
+        "panel_capacity_minutes": 3060,
+        "panel_count": 3,
+        "placement_days": [
+          "DAY_3",
+          "DAY_4"
+        ],
+        "popularity_score": 78,
+        "priority_tier": "P2",
+        "shortlist_count": 38
+      }
+    ]
+  },
+  "counts": {
+    "active_students": 776,
+    "available_panels": 85,
+    "companies": 35,
+    "interviews": 859,
+    "panels": 85,
+    "rooms": 20,
+    "shortlists": 859,
+    "students": 800,
+    "withdrawn_students": 24
+  },
+  "day_demand_estimate": {
+    "DAY_1": {
+      "companies": 15,
+      "estimated_interviews": 328.94,
+      "estimated_minutes": 14309.67
+    },
+    "DAY_2": {
+      "companies": 8,
+      "estimated_interviews": 146.62,
+      "estimated_minutes": 7559.36
+    },
+    "DAY_3": {
+      "companies": 10,
+      "estimated_interviews": 129.04,
+      "estimated_minutes": 6284.81
+    },
+    "DAY_4": {
+      "companies": 17,
+      "estimated_interviews": 254.4,
+      "estimated_minutes": 11281.17
+    }
+  },
+  "interview_count": 859,
+  "popularity_shortlist_correlation": 0.7724,
+  "seed": 20260829,
+  "shortlist_distribution": {
+    "active_students": {
+      "median": 1.0,
+      "students_with_0": 163,
+      "students_with_0_pct": 21.01,
+      "students_with_16_plus": 0,
+      "students_with_16_plus_pct": 0.0,
+      "students_with_1_to_3": 607,
+      "students_with_1_to_3_pct": 78.22,
+      "students_with_4_to_7": 6,
+      "students_with_4_to_7_pct": 0.77,
+      "students_with_8_to_15": 0,
+      "students_with_8_to_15_pct": 0.0
+    },
+    "all_students": {
+      "median": 1.0,
+      "students_with_0": 187,
+      "students_with_0_pct": 23.38,
+      "students_with_16_plus": 0,
+      "students_with_16_plus_pct": 0.0,
+      "students_with_1_to_3": 607,
+      "students_with_1_to_3_pct": 75.88,
+      "students_with_4_to_7": 6,
+      "students_with_4_to_7_pct": 0.75,
+      "students_with_8_to_15": 0,
+      "students_with_8_to_15_pct": 0.0
+    }
+  }
+}

@@ -1,0 +1,602 @@
+[
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block A",
+    "capacity": 7,
+    "floor": 1,
+    "id": "ROOM001",
+    "name": "Interview Room 01",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block B",
+    "capacity": 10,
+    "floor": 2,
+    "id": "ROOM002",
+    "name": "Interview Room 02",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "building": "Innovation Center",
+    "capacity": 13,
+    "floor": 3,
+    "id": "ROOM003",
+    "name": "Interview Room 03",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Tech Tower",
+    "capacity": 5,
+    "floor": 4,
+    "id": "ROOM004",
+    "name": "Interview Room 04",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block A",
+    "capacity": 8,
+    "floor": 5,
+    "id": "ROOM005",
+    "name": "Interview Room 05",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block B",
+    "capacity": 11,
+    "floor": 1,
+    "id": "ROOM006",
+    "name": "Interview Room 06",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Innovation Center",
+    "capacity": 14,
+    "floor": 2,
+    "id": "ROOM007",
+    "name": "Interview Room 07",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Tech Tower",
+    "capacity": 6,
+    "floor": 3,
+    "id": "ROOM008",
+    "name": "Interview Room 08",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "building": "Academic Block A",
+    "capacity": 9,
+    "floor": 4,
+    "id": "ROOM009",
+    "name": "Interview Room 09",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      }
+    ],
+    "building": "Academic Block B",
+    "capacity": 12,
+    "floor": 5,
+    "id": "ROOM010",
+    "name": "Interview Room 10",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Innovation Center",
+    "capacity": 4,
+    "floor": 1,
+    "id": "ROOM011",
+    "name": "Interview Room 11",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Tech Tower",
+    "capacity": 7,
+    "floor": 2,
+    "id": "ROOM012",
+    "name": "Interview Room 12",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block A",
+    "capacity": 10,
+    "floor": 3,
+    "id": "ROOM013",
+    "name": "Interview Room 13",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block B",
+    "capacity": 13,
+    "floor": 4,
+    "id": "ROOM014",
+    "name": "Interview Room 14",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "building": "Innovation Center",
+    "capacity": 5,
+    "floor": 5,
+    "id": "ROOM015",
+    "name": "Interview Room 15",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Tech Tower",
+    "capacity": 8,
+    "floor": 1,
+    "id": "ROOM016",
+    "name": "Interview Room 16",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block A",
+    "capacity": 11,
+    "floor": 2,
+    "id": "ROOM017",
+    "name": "Interview Room 17",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Academic Block B",
+    "capacity": 14,
+    "floor": 3,
+    "id": "ROOM018",
+    "name": "Interview Room 18",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Innovation Center",
+    "capacity": 6,
+    "floor": 4,
+    "id": "ROOM019",
+    "name": "Interview Room 19",
+    "status": "AVAILABLE"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "17:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "building": "Tech Tower",
+    "capacity": 9,
+    "floor": 5,
+    "id": "ROOM020",
+    "name": "Interview Room 20",
+    "status": "AVAILABLE"
+  }
+]

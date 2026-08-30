@@ -1,0 +1,792 @@
+[
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.49,
+    "id": "COMP001",
+    "industry": "Cloud Infrastructure",
+    "interview_duration_minutes": 45,
+    "name": "Nimbus Cloud",
+    "panel_count": 4,
+    "placement_days": [
+      "DAY_1",
+      "DAY_2"
+    ],
+    "popularity_score": 99,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.85,
+    "id": "COMP002",
+    "industry": "Artificial Intelligence",
+    "interview_duration_minutes": 60,
+    "name": "BrightScale AI",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_2"
+    ],
+    "popularity_score": 94,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.33,
+    "id": "COMP003",
+    "industry": "Enterprise Software",
+    "interview_duration_minutes": 45,
+    "name": "VectorSoft",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_4"
+    ],
+    "popularity_score": 92,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.6,
+    "id": "COMP004",
+    "industry": "Analytics",
+    "interview_duration_minutes": 45,
+    "name": "QuantumEdge Analytics",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_4"
+    ],
+    "popularity_score": 92,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.18,
+    "id": "COMP005",
+    "industry": "FinTech",
+    "interview_duration_minutes": 45,
+    "name": "Nova Payments",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_2"
+    ],
+    "popularity_score": 94,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.63,
+    "id": "COMP006",
+    "industry": "FinTech",
+    "interview_duration_minutes": 60,
+    "name": "Apex Fintech",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_4"
+    ],
+    "popularity_score": 92,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.15,
+    "id": "COMP007",
+    "industry": "SaaS",
+    "interview_duration_minutes": 45,
+    "name": "Clearline SaaS",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_3"
+    ],
+    "popularity_score": 89,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.93,
+    "id": "COMP008",
+    "industry": "E-Commerce",
+    "interview_duration_minutes": 45,
+    "name": "Pulse Commerce",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_3"
+    ],
+    "popularity_score": 86,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.19,
+    "id": "COMP009",
+    "industry": "Banking",
+    "interview_duration_minutes": 45,
+    "name": "Stellar Bank",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_2"
+    ],
+    "popularity_score": 88,
+    "priority_tier": "P1"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.79,
+    "id": "COMP010",
+    "industry": "Retail Tech",
+    "interview_duration_minutes": 30,
+    "name": "BlueRiver Retail",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_4"
+    ],
+    "popularity_score": 81,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.25,
+    "id": "COMP011",
+    "industry": "Telecom",
+    "interview_duration_minutes": 45,
+    "name": "Meridian Telecom",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_3"
+    ],
+    "popularity_score": 81,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.36,
+    "id": "COMP012",
+    "industry": "Semiconductors",
+    "interview_duration_minutes": 60,
+    "name": "Fusion Semiconductors",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 80,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.69,
+    "id": "COMP013",
+    "industry": "Cybersecurity",
+    "interview_duration_minutes": 60,
+    "name": "Synapse Security",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_2",
+      "DAY_4"
+    ],
+    "popularity_score": 81,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.06,
+    "id": "COMP014",
+    "industry": "Product Engineering",
+    "interview_duration_minutes": 45,
+    "name": "Vertex Labs",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_3",
+      "DAY_4"
+    ],
+    "popularity_score": 78,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.3,
+    "id": "COMP015",
+    "industry": "Data Platforms",
+    "interview_duration_minutes": 60,
+    "name": "AccelData Systems",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_2",
+      "DAY_3"
+    ],
+    "popularity_score": 79,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.74,
+    "id": "COMP016",
+    "industry": "Energy",
+    "interview_duration_minutes": 60,
+    "name": "Helio Energy",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_3"
+    ],
+    "popularity_score": 69,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.11,
+    "id": "COMP017",
+    "industry": "Automotive",
+    "interview_duration_minutes": 45,
+    "name": "Kinetic Mobility",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_3"
+    ],
+    "popularity_score": 68,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.89,
+    "id": "COMP018",
+    "industry": "Automotive",
+    "interview_duration_minutes": 45,
+    "name": "Orion Motors",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 72,
+    "priority_tier": "P2"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "cgpa_cutoff": 7.26,
+    "id": "COMP019",
+    "industry": "Consulting",
+    "interview_duration_minutes": 30,
+    "name": "Granite Consulting",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_1",
+      "DAY_4"
+    ],
+    "popularity_score": 66,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:30",
+        "start_time": "09:30"
+      }
+    ],
+    "cgpa_cutoff": 6.7,
+    "id": "COMP020",
+    "industry": "Logistics",
+    "interview_duration_minutes": 45,
+    "name": "Northstar Logistics",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_1"
+    ],
+    "popularity_score": 68,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 7.08,
+    "id": "COMP021",
+    "industry": "HealthTech",
+    "interview_duration_minutes": 60,
+    "name": "Cedar HealthTech",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 66,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      },
+      {
+        "day": "DAY_4",
+        "end_time": "17:30",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.94,
+    "id": "COMP022",
+    "industry": "Networking",
+    "interview_duration_minutes": 60,
+    "name": "Prism Networks",
+    "panel_count": 3,
+    "placement_days": [
+      "DAY_2",
+      "DAY_4"
+    ],
+    "popularity_score": 64,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "cgpa_cutoff": 6.95,
+    "id": "COMP023",
+    "industry": "Insurance",
+    "interview_duration_minutes": 45,
+    "name": "Beacon Insurance",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 62,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.58,
+    "id": "COMP024",
+    "industry": "Enterprise Software",
+    "interview_duration_minutes": 45,
+    "name": "Maple ERP",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 65,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.49,
+    "id": "COMP025",
+    "industry": "Digital Media",
+    "interview_duration_minutes": 30,
+    "name": "Horizon Media",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 58,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "cgpa_cutoff": 6.89,
+    "id": "COMP026",
+    "industry": "Infrastructure",
+    "interview_duration_minutes": 60,
+    "name": "TerraGrid Infra",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 60,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.76,
+    "id": "COMP027",
+    "industry": "HRTech",
+    "interview_duration_minutes": 30,
+    "name": "Elevate HRTech",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_1"
+    ],
+    "popularity_score": 57,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_2",
+        "end_time": "17:30",
+        "start_time": "10:00"
+      }
+    ],
+    "cgpa_cutoff": 6.91,
+    "id": "COMP028",
+    "industry": "Embedded Systems",
+    "interview_duration_minutes": 60,
+    "name": "Zentra Devices",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_2"
+    ],
+    "popularity_score": 55,
+    "priority_tier": "P4"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "09:00"
+      }
+    ],
+    "cgpa_cutoff": 6.76,
+    "id": "COMP029",
+    "industry": "Pharma Tech",
+    "interview_duration_minutes": 45,
+    "name": "TruVista Pharma",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 57,
+    "priority_tier": "P3"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "09:30"
+      }
+    ],
+    "cgpa_cutoff": 7.23,
+    "id": "COMP030",
+    "industry": "Robotics",
+    "interview_duration_minutes": 60,
+    "name": "Delta Robotics",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_3"
+    ],
+    "popularity_score": 54,
+    "priority_tier": "P4"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "09:30"
+      }
+    ],
+    "cgpa_cutoff": 7.18,
+    "id": "COMP031",
+    "industry": "Aerospace",
+    "interview_duration_minutes": 60,
+    "name": "Argo Aerospace",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_1"
+    ],
+    "popularity_score": 51,
+    "priority_tier": "P4"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "17:00",
+        "start_time": "10:00"
+      }
+    ],
+    "cgpa_cutoff": 6.72,
+    "id": "COMP032",
+    "industry": "Engineering Services",
+    "interview_duration_minutes": 45,
+    "name": "Riverfront EPC",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_3"
+    ],
+    "popularity_score": 48,
+    "priority_tier": "P4"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_4",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      }
+    ],
+    "cgpa_cutoff": 6.62,
+    "id": "COMP033",
+    "industry": "FMCG",
+    "interview_duration_minutes": 45,
+    "name": "Summit Foods",
+    "panel_count": 1,
+    "placement_days": [
+      "DAY_4"
+    ],
+    "popularity_score": 43,
+    "priority_tier": "P4"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_1",
+        "end_time": "17:00",
+        "start_time": "10:00"
+      }
+    ],
+    "cgpa_cutoff": 6.63,
+    "id": "COMP034",
+    "industry": "Manufacturing",
+    "interview_duration_minutes": 60,
+    "name": "Ironclad Manufacturing",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_1"
+    ],
+    "popularity_score": 45,
+    "priority_tier": "P4"
+  },
+  {
+    "availability": [
+      {
+        "day": "DAY_3",
+        "end_time": "18:00",
+        "start_time": "10:00"
+      }
+    ],
+    "cgpa_cutoff": 6.78,
+    "id": "COMP035",
+    "industry": "Industrial Tech",
+    "interview_duration_minutes": 60,
+    "name": "DeepCore Mining Tech",
+    "panel_count": 2,
+    "placement_days": [
+      "DAY_3"
+    ],
+    "popularity_score": 44,
+    "priority_tier": "P4"
+  }
+]
