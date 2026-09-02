@@ -32,23 +32,40 @@ def can_assign(
 ) -> ConstraintResult:
     """Check whether an interview assignment satisfies scheduling constraints."""
 
-    checks = (
-        _check_day_and_time(assignment),
-        _check_student_availability(assignment, student),
-        _check_company_availability(assignment, company),
-        _check_panel_availability(assignment, panel),
-        _check_room_availability(assignment, room),
-        _check_panel_status(panel),
-        _check_room_status(room),
-        _check_existing_conflicts(
-            assignment,
-            existing_assignments or [],
-        ),
-    )
+    res = _check_day_and_time(assignment)
+    if not res.valid:
+        return res
 
-    for result in checks:
-        if not result.valid:
-            return result
+    res = _check_student_availability(assignment, student)
+    if not res.valid:
+        return res
+
+    res = _check_company_availability(assignment, company)
+    if not res.valid:
+        return res
+
+    res = _check_panel_availability(assignment, panel)
+    if not res.valid:
+        return res
+
+    res = _check_room_availability(assignment, room)
+    if not res.valid:
+        return res
+
+    res = _check_panel_status(panel)
+    if not res.valid:
+        return res
+
+    res = _check_room_status(room)
+    if not res.valid:
+        return res
+
+    res = _check_existing_conflicts(
+        assignment,
+        existing_assignments or [],
+    )
+    if not res.valid:
+        return res
 
     return ConstraintResult(valid=True)
 

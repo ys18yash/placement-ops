@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections import Counter
+from collections import Counter, defaultdict
 
 from placementops.dataset.constants import PLACEMENT_DAYS, TIME_SLOTS
 from placementops.dataset.models import Dataset, Interview
@@ -36,6 +36,76 @@ def generate_schedule(dataset: Dataset) -> Schedule:
         available_rooms,
     )
 
+    # Precompute valid slots per duration
+    durations = {interview.duration_minutes for interview in interviews}
+    slots_by_duration: dict[int, list[tuple[str, str, str]]] = {}
+    for duration in durations:
+        valid_slots = []
+        for day in PLACEMENT_DAYS:
+            for start_time in TIME_SLOTS:
+                end_time = _add_minutes(start_time, duration)
+                if end_time is not None and end_time <= "18:00":
+                    valid_slots.append((day, start_time, end_time))
+        slots_by_duration[duration] = valid_slots
+
+    all_slots = {
+        slot
+        for slot_list in slots_by_duration.values()
+        for slot in slot_list
+    }
+
+    # Precompute static availability sets
+    student_avail: dict[str, set[tuple[str, str, str]]] = {
+        student.id: {
+            (d, s, e)
+            for d, s, e in all_slots
+            if _fits_any_window(d, s, e, student.availability)
+        }
+        for student in dataset.students
+    }
+
+    company_avail: dict[str, set[tuple[str, str, str]]] = {
+        company.id: {
+            (d, s, e)
+            for d, s, e in all_slots
+            if d in company.placement_days and _fits_any_window(d, s, e, company.availability)
+        }
+        for company in dataset.companies
+    }
+
+    panel_avail: dict[str, set[tuple[str, str, str]]] = {
+        panel.id: {
+            (d, s, e)
+            for d, s, e in all_slots
+            if _fits_any_window(d, s, e, panel.availability)
+        }
+        for panel in available_panels
+    }
+
+    room_avail: dict[str, set[tuple[str, str, str]]] = {
+        room.id: {
+            (d, s, e)
+            for d, s, e in all_slots
+            if _fits_any_window(d, s, e, room.availability)
+        }
+        for room in available_rooms
+    }
+
+    panels_by_company: dict[str, list[object]] = defaultdict(list)
+    for panel in available_panels:
+        panels_by_company[panel.company_id].append(panel)
+
+    # Dynamic occupancy tracking: (resource_id, day) -> list of (start_time, end_time)
+    student_busy: dict[tuple[str, str], list[tuple[str, str]]] = defaultdict(list)
+    panel_busy: dict[tuple[str, str], list[tuple[str, str]]] = defaultdict(list)
+    room_busy: dict[tuple[str, str], list[tuple[str, str]]] = defaultdict(list)
+
+    # Incremental score counters: (id, day) -> count
+    company_day_counts: dict[tuple[str, str], int] = defaultdict(int)
+    panel_day_counts: dict[tuple[str, str], int] = defaultdict(int)
+    room_day_counts: dict[tuple[str, str], int] = defaultdict(int)
+    student_day_counts: dict[tuple[str, str], int] = defaultdict(int)
+
     assignments: list[ScheduleAssignment] = []
     unscheduled: list[str] = []
 
@@ -47,28 +117,132 @@ def generate_schedule(dataset: Dataset) -> Schedule:
             unscheduled.append(interview.id)
             continue
 
-        candidates = _candidate_assignments(
-            interview=interview,
-            student=student,
-            company=company,
-            available_panels=available_panels,
-            available_rooms=available_rooms,
-            existing_assignments=assignments,
-        )
-
-        if not candidates:
+        company_panels = panels_by_company.get(company.id, [])
+        if not company_panels:
             unscheduled.append(interview.id)
             continue
 
-        candidates.sort(
-            key=lambda candidate: _candidate_score(
-                candidate,
-                interview,
-                assignments,
-            )
+        candidate_slots = slots_by_duration.get(interview.duration_minutes, [])
+        c_avail = company_avail[company.id]
+        s_avail = student_avail[student.id]
+
+        best_score = None
+        best_candidate: tuple[object, object, str, str, str] | None = None
+
+        for day, start_time, end_time in candidate_slots:
+            slot_tuple = (day, start_time, end_time)
+
+            if slot_tuple not in c_avail:
+                continue
+
+            if slot_tuple not in s_avail:
+                continue
+
+            # Student conflict check
+            s_busy_list = student_busy.get((student.id, day))
+            if s_busy_list:
+                has_s_conflict = False
+                for s, e in s_busy_list:
+                    if start_time < e and s < end_time:
+                        has_s_conflict = True
+                        break
+                if has_s_conflict:
+                    continue
+
+            # Filter valid panels for this slot
+            valid_panels = []
+            for panel in company_panels:
+                if slot_tuple not in panel_avail[panel.id]:
+                    continue
+                p_busy_list = panel_busy.get((panel.id, day))
+                if p_busy_list:
+                    has_p_conflict = False
+                    for s, e in p_busy_list:
+                        if start_time < e and s < end_time:
+                            has_p_conflict = True
+                            break
+                    if has_p_conflict:
+                        continue
+                valid_panels.append(panel)
+
+            if not valid_panels:
+                continue
+
+            # Filter valid rooms for this slot
+            valid_rooms = []
+            for room in available_rooms:
+                if slot_tuple not in room_avail[room.id]:
+                    continue
+                r_busy_list = room_busy.get((room.id, day))
+                if r_busy_list:
+                    has_r_conflict = False
+                    for s, e in r_busy_list:
+                        if start_time < e and s < end_time:
+                            has_r_conflict = True
+                            break
+                    if has_r_conflict:
+                        continue
+                valid_rooms.append(room)
+
+            if not valid_rooms:
+                continue
+
+            same_company_day = company_day_counts[(company.id, day)]
+            same_student_day = student_day_counts[(student.id, day)]
+
+            # Generate and score candidates in exact nested order: panels -> rooms
+            for panel in valid_panels:
+                same_panel_day = panel_day_counts[(panel.id, day)]
+                panel_load = same_panel_day * 100 + same_student_day
+
+                for room in valid_rooms:
+                    same_room_day = room_day_counts[(room.id, day)]
+                    resource_load = panel_load + same_room_day * 10
+
+                    score = (
+                        same_company_day,
+                        resource_load,
+                        same_panel_day,
+                        same_room_day,
+                        same_student_day,
+                        day,
+                        start_time,
+                        panel.id,
+                        room.id,
+                        interview.id,
+                    )
+
+                    if best_score is None or score < best_score:
+                        best_score = score
+                        best_candidate = (panel, room, day, start_time, end_time)
+
+        if best_candidate is None:
+            unscheduled.append(interview.id)
+            continue
+
+        panel, room, day, start_time, end_time = best_candidate
+        assignment = ScheduleAssignment(
+            interview_id=interview.id,
+            student_id=student.id,
+            company_id=company.id,
+            panel_id=panel.id,
+            room_id=room.id,
+            day=day,
+            start_time=start_time,
+            end_time=end_time,
         )
 
-        assignments.append(candidates[0])
+        assignments.append(assignment)
+
+        # Update dynamic state
+        student_busy[(student.id, day)].append((start_time, end_time))
+        panel_busy[(panel.id, day)].append((start_time, end_time))
+        room_busy[(room.id, day)].append((start_time, end_time))
+
+        company_day_counts[(company.id, day)] += 1
+        student_day_counts[(student.id, day)] += 1
+        panel_day_counts[(panel.id, day)] += 1
+        room_day_counts[(room.id, day)] += 1
 
     return Schedule(
         assignments=assignments,
@@ -268,6 +442,23 @@ def _candidate_score(
         candidate.room_id,
         interview.id,
     )
+
+
+def _fits_any_window(
+    day: str,
+    start_time: str,
+    end_time: str,
+    windows: list[object],
+) -> bool:
+    for window in windows:
+        if (
+            window.day == day
+            and window.start_time <= start_time
+            and end_time <= window.end_time
+        ):
+            return True
+
+    return False
 
 
 def _add_minutes(

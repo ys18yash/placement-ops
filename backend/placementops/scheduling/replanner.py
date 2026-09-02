@@ -58,6 +58,18 @@ def replan_schedule(
         student = students.get(interview.student_id)
         company = companies.get(interview.company_id)
 
+        if disruption.type == "STUDENT_WITHDRAWAL":
+            changes.append(
+                ScheduleChange(
+                    interview_id=old_assignment.interview_id,
+                    change_type="UNSCHEDULED",
+                    old_assignment=old_assignment,
+                    new_assignment=None,
+                    reason="Student withdrew from the placement process.",
+                )
+            )
+            continue
+
         replacement = _find_replacement(
             interview=interview,
             student=student,
@@ -148,7 +160,6 @@ def _is_affected(
         return (
             disruption.resource_id is not None
             and assignment.student_id == disruption.resource_id
-            and assignment.day == disruption.day
         )
 
     if disruption.type == "COMPANY_DELAY":

@@ -4,9 +4,14 @@ import unittest
 
 from placementops.dataset import generate_dataset
 from placementops.scheduling.metrics import calculate_replanning_metrics
+from placementops.scheduling.models import (
+    Disruption,
+    Schedule,
+    ScheduleAssignment,
+    ScheduleChange,
+)
 from placementops.scheduling.replanner import replan_schedule
 from placementops.scheduling.scheduler import generate_schedule
-from placementops.scheduling.models import Disruption
 
 
 class ReplanningMetricsTests(unittest.TestCase):
@@ -133,6 +138,74 @@ class ReplanningMetricsTests(unittest.TestCase):
         )
 
         self.assertEqual(first, second)
+
+    def test_metrics_count_affected_and_newly_unscheduled_from_changes(self) -> None:
+        original = Schedule(
+            assignments=[
+                ScheduleAssignment(
+                    interview_id="INT1",
+                    student_id="STU1",
+                    company_id="COMP1",
+                    panel_id="PANEL1",
+                    room_id="ROOM1",
+                    day="DAY_1",
+                    start_time="09:00",
+                    end_time="09:30",
+                ),
+                ScheduleAssignment(
+                    interview_id="INT2",
+                    student_id="STU2",
+                    company_id="COMP1",
+                    panel_id="PANEL1",
+                    room_id="ROOM2",
+                    day="DAY_1",
+                    start_time="09:30",
+                    end_time="10:00",
+                ),
+            ],
+            unscheduled_interview_ids=["INT3"],
+        )
+        replanned = Schedule(
+            assignments=[
+                ScheduleAssignment(
+                    interview_id="INT1",
+                    student_id="STU1",
+                    company_id="COMP1",
+                    panel_id="PANEL2",
+                    room_id="ROOM3",
+                    day="DAY_1",
+                    start_time="10:00",
+                    end_time="10:30",
+                ),
+            ],
+            unscheduled_interview_ids=["INT2", "INT3"],
+        )
+        changes = [
+            ScheduleChange(
+                interview_id="INT1",
+                change_type="RESCHEDULED",
+                old_assignment=original.assignments[0],
+                new_assignment=replanned.assignments[0],
+            ),
+            ScheduleChange(
+                interview_id="INT2",
+                change_type="UNSCHEDULED",
+                old_assignment=original.assignments[1],
+                new_assignment=None,
+            ),
+        ]
+
+        metrics = calculate_replanning_metrics(
+            original,
+            replanned,
+            changes,
+        )
+
+        self.assertEqual(2, metrics["affected_interviews"])
+        self.assertEqual(0, metrics["unchanged_interviews"])
+        self.assertEqual(1, metrics["moved_interviews"])
+        self.assertEqual(1, metrics["newly_unscheduled_interviews"])
+        self.assertEqual(2, metrics["schedule_change_count"])
 
 
 if __name__ == "__main__":

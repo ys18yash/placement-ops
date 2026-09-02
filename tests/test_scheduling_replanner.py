@@ -237,6 +237,57 @@ class ReplanningTests(unittest.TestCase):
             replanned_unaffected,
         )
 
+    def test_student_withdrawal_unschedules_student_interviews(self) -> None:
+        student_id = max(
+            (
+                assignment.student_id
+                for assignment in self.schedule.assignments
+            ),
+            key=lambda item: sum(
+                1
+                for assignment in self.schedule.assignments
+                if assignment.student_id == item
+            ),
+        )
+        original_student_interviews = {
+            assignment.interview_id
+            for assignment in self.schedule.assignments
+            if assignment.student_id == student_id
+        }
+
+        disruption = Disruption(
+            id="DISRUPTION_STUDENT_1",
+            type="STUDENT_WITHDRAWAL",
+            day="DAY_1",
+            resource_id=student_id,
+        )
+
+        new_schedule, changes = replan_schedule(
+            self.dataset,
+            self.schedule,
+            disruption,
+        )
+
+        self.assertTrue(original_student_interviews)
+        self.assertFalse(
+            any(
+                assignment.student_id == student_id
+                for assignment in new_schedule.assignments
+            )
+        )
+        self.assertTrue(
+            original_student_interviews.issubset(
+                set(new_schedule.unscheduled_interview_ids)
+            )
+        )
+        self.assertTrue(
+            all(
+                change.change_type == "UNSCHEDULED"
+                for change in changes
+                if change.interview_id in original_student_interviews
+            )
+        )
+
     def test_result_assignments_still_satisfy_constraints(self) -> None:
         assignment = self._find_assignment()
 

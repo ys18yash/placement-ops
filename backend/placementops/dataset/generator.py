@@ -73,7 +73,7 @@ def generate_dataset(seed: int = DEFAULT_SEED) -> Dataset:
             "COMPANY_DELAY",
             "PANEL_DROPOUT",
             "STUDENT_WITHDRAWAL",
-            "ROOM_UNAVAILABILITY",
+            "ROOM_UNAVAILABLE",
         ],
     )
 

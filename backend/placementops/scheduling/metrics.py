@@ -158,49 +158,29 @@ def calculate_replanning_metrics(
 ) -> dict[str, object]:
     """Measure how much an existing schedule changed after replanning."""
 
-    original_assignments = {
-        assignment.interview_id: assignment
-        for assignment in original_schedule.assignments
-    }
+    original_scheduled = len(original_schedule.assignments)
+    replanned_scheduled = len(replanned_schedule.assignments)
+    original_unscheduled = len(original_schedule.unscheduled_interview_ids)
+    replanned_unscheduled = len(replanned_schedule.unscheduled_interview_ids)
 
-    replanned_assignments = {
-        assignment.interview_id: assignment
-        for assignment in replanned_schedule.assignments
-    }
-
-    original_scheduled = len(original_assignments)
-    replanned_scheduled = len(replanned_assignments)
-
-    original_unscheduled = len(
-        original_schedule.unscheduled_interview_ids
+    unchanged_interviews = sum(
+        1
+        for change in changes
+        if getattr(change, "change_type", None) == "UNCHANGED"
     )
-    replanned_unscheduled = len(
-        replanned_schedule.unscheduled_interview_ids
+    moved_interviews = sum(
+        1
+        for change in changes
+        if getattr(change, "change_type", None) == "RESCHEDULED"
     )
-
-    unchanged_interviews = 0
-    moved_interviews = 0
-
-    for interview_id in (
-        set(original_assignments) | set(replanned_assignments)
-    ):
-        original = original_assignments.get(interview_id)
-        replanned = replanned_assignments.get(interview_id)
-
-        if original is not None and replanned is not None:
-            if original == replanned:
-                unchanged_interviews += 1
-            else:
-                moved_interviews += 1
-
-    affected_interviews = moved_interviews
-
+    affected_interviews = len(changes)
     newly_unscheduled_interviews = len(
         set(replanned_schedule.unscheduled_interview_ids)
         - set(original_schedule.unscheduled_interview_ids)
     )
-
-    schedule_change_count = len(changes)
+    schedule_change_count = (
+        moved_interviews + newly_unscheduled_interviews
+    )
 
     change_rate = (
         schedule_change_count / original_scheduled
