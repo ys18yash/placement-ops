@@ -17,8 +17,8 @@ try:
 except ImportError:
     pass
 
-
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from placementops.api.routes import router
 
@@ -28,6 +28,16 @@ app = FastAPI(
     version="0.1.0",
 )
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://placement-ops-final-osomazj4-yashsharma23csds-2811s-projects.vercel.app",
+    ],
+    allow_credentials=False,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(router)
 
 
@@ -35,4 +45,3 @@ app.include_router(router)
 def health_check() -> dict[str, str]:
     """Return API health status."""
     return {"status": "ok"}
-
