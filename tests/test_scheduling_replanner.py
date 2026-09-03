@@ -377,6 +377,38 @@ class ReplanningTests(unittest.TestCase):
         )
         return self.schedule.assignments[0]
 
+    def test_rescheduled_changes_have_distinct_assignments(self) -> None:
+        """Regression test ensuring RESCHEDULED changes have distinct old and new assignments."""
+        disruption = Disruption(
+            id="DISRUPTION_ROOM_OUTAGE",
+            type="ROOM_UNAVAILABLE",
+            day="DAY_1",
+            resource_id="ROOM001",
+        )
+
+        new_schedule, changes = replan_schedule(
+            self.dataset,
+            self.schedule,
+            disruption,
+        )
+
+        rescheduled_changes = [c for c in changes if c.change_type == "RESCHEDULED"]
+        unscheduled_changes = [c for c in changes if c.change_type == "UNSCHEDULED"]
+
+        self.assertTrue(len(rescheduled_changes) > 0, "Expected at least one rescheduled change for ROOM001 outage.")
+        for change in rescheduled_changes:
+            self.assertIsNotNone(change.old_assignment)
+            self.assertIsNotNone(change.new_assignment)
+            self.assertNotEqual(
+                change.old_assignment,
+                change.new_assignment,
+                f"Rescheduled change {change.interview_id} must have distinct old and new assignments."
+            )
+
+        for change in unscheduled_changes:
+            self.assertIsNotNone(change.old_assignment)
+            self.assertIsNone(change.new_assignment)
+
     def _first_supported_disruption(self) -> Disruption:
         assignment = self._find_assignment()
 
@@ -390,3 +422,6 @@ class ReplanningTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+

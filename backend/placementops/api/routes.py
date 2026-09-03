@@ -73,6 +73,21 @@ class ReplanRequest(BaseModel):
     disruption: DisruptionRequest
 
 
+class AssistantQueryRequest(BaseModel):
+    """Request payload for the PlacementOps Grounded Assistant."""
+
+    question: str
+    messages: list[dict[str, str]] | None = None
+    context: dict[str, object] | None = None
+
+    @field_validator("question")
+    @classmethod
+    def validate_question(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Question must not be empty.")
+        return value
+
+
 @router.post("/schedule/generate")
 def generate_schedule(
     seed: int | None = Query(
@@ -120,3 +135,66 @@ def replan_schedule(
             status_code=500,
             detail=str(exc),
         ) from exc
+
+
+@router.post("/assistant/query")
+def query_assistant(
+    request: AssistantQueryRequest,
+) -> dict[str, object]:
+    """Query the PlacementOps Assistant with grounded operational context."""
+    from placementops.api.service import query_assistant_service
+
+    try:
+        return query_assistant_service(
+            question=request.question,
+            messages=request.messages,
+            context=request.context,
+        )
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc),
+        ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=str(exc),
+        ) from exc
+
+
+@router.post("/assistant/stream")
+def stream_assistant(
+    request: AssistantQueryRequest,
+):
+    """Stream real-time SSE token deltas from Google Gemini API."""
+
+    from fastapi.responses import StreamingResponse
+    from placementops.api.service import stream_assistant_service
+
+    try:
+        generator = stream_assistant_service(
+            question=request.question,
+            messages=request.messages,
+            context=request.context,
+        )
+        return StreamingResponse(
+            generator,
+            media_type="text/event-stream",
+            headers={
+                "Cache-Control": "no-cache",
+                "Connection": "keep-alive",
+                "X-Accel-Buffering": "no",
+            },
+        )
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=400,
+            detail=str(exc),
+        ) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=str(exc),
+        ) from exc
+
+

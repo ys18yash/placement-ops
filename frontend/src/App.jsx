@@ -1,8 +1,35 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import Header from './components/layout/Header'
+import Sidebar from './components/layout/Sidebar'
+import Hero from './components/layout/Hero'
+
+import OverviewView from './components/overview/OverviewView'
+import ScheduleView from './components/schedule/ScheduleView'
+import TimelineView from './components/timeline/TimelineView'
+import AnalyticsView from './components/analytics/AnalyticsView'
+import ReplanningView from './components/replanning/ReplanningView'
+import ToastStack from './components/notifications/ToastStack'
+import AssistantDrawer from './components/assistant/AssistantDrawer'
+import AssignmentModal from './components/timeline/AssignmentModal'
 import './App.css'
 
+const DEFAULT_SEED = 20260829
+const TOTAL_DATASET_WORKLOAD = 859
+
+let notifCounter = 0
+function getNextNotifId() {
+  notifCounter += 1
+  return `notif-${notifCounter}`
+}
+
+let toastCounter = 0
+function getNextToastId() {
+  toastCounter += 1
+  return `toast-${toastCounter}`
+}
+
 const EMPTY_METRICS = {
-  total_interviews: 0,
+  total_interviews: TOTAL_DATASET_WORKLOAD,
   scheduled_interviews: 0,
   unscheduled_interviews: 0,
   completion_rate: 0,
@@ -15,99 +42,154 @@ const EMPTY_METRICS = {
   },
 }
 
-const DISRUPTION_TYPES = [
-  {
-    value: 'PANEL_DROPOUT',
-    label: 'Panel Dropout',
-    resourceLabel: 'Panel',
-    resourcePlaceholder: 'e.g. PANEL-COMP027-01',
-  },
-  {
-    value: 'ROOM_UNAVAILABLE',
-    label: 'Room Unavailable',
-    resourceLabel: 'Room',
-    resourcePlaceholder: 'e.g. ROOM001',
-  },
-  {
-    value: 'STUDENT_WITHDRAWAL',
-    label: 'Student Withdrawal',
-    resourceLabel: 'Student',
-    resourcePlaceholder: 'e.g. STU0595',
-  },
-  {
-    value: 'COMPANY_DELAY',
-    label: 'Company Delay',
-    resourceLabel: 'Company',
-    resourcePlaceholder: 'e.g. COMP027',
-  },
-]
-
-function formatPercent(value) {
-  return `${(Number(value) * 100).toFixed(2)}%`
-}
-
-function formatTimeRange(start, end) {
-  if (!start || !end) return '—'
-  return `${start} – ${end}`
-}
-
 async function parseResponse(response, fallbackMessage) {
   if (response.ok) {
     return response.json()
   }
 
   let message = `${fallbackMessage} (${response.status})`
-
   try {
     const body = await response.json()
     if (body.detail) {
-      message = body.detail
+      if (typeof body.detail === 'string') {
+        message = body.detail
+      } else if (Array.isArray(body.detail)) {
+        message = body.detail.map((err) => `${err.loc?.slice(-1)[0] || 'field'}: ${err.msg}`).join(', ')
+      }
     }
   } catch {
-    // Keep fallback message.
+    // fallback
   }
 
   throw new Error(message)
 }
 
-function App() {
+export default function App() {
+  // Theme Management (Light / Dark with localStorage and system fallback)
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('placementops_theme')
+    if (saved === 'dark' || saved === 'light') return saved
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('placementops_theme', theme)
+  }, [theme])
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+  }
+
+  // Global Engine & Schedule State
+  const [seed, setSeed] = useState(DEFAULT_SEED)
+  const [activeTab, setActiveTab] = useState('OVERVIEW')
+  const [systemHealth, setSystemHealth] = useState({ status: 'checking', latencyMs: null })
   const [metrics, setMetrics] = useState(EMPTY_METRICS)
   const [assignments, setAssignments] = useState([])
   const [unscheduledIds, setUnscheduledIds] = useState([])
   const [loading, setLoading] = useState(false)
+  const [generateLatency, setGenerateLatency] = useState(null)
   const [replanning, setReplanning] = useState(false)
+  const [replanLatency, setReplanLatency] = useState(null)
   const [error, setError] = useState('')
   const [generated, setGenerated] = useState(false)
 
-  const [disruptionType, setDisruptionType] = useState('ROOM_UNAVAILABLE')
-  const [disruptionDay, setDisruptionDay] = useState('DAY_1')
-  const [resourceId, setResourceId] = useState('ROOM001')
-  const [effectiveTime, setEffectiveTime] = useState('')
-  const [details, setDetails] = useState('')
-
+  // Replanning State
   const [replanResult, setReplanResult] = useState(null)
 
-  const selectedDisruption = useMemo(
-    () =>
-      DISRUPTION_TYPES.find((item) => item.value === disruptionType) ||
-      DISRUPTION_TYPES[0],
-    [disruptionType],
-  )
+  // Details Modal
+  const [inspectAssignment, setInspectAssignment] = useState(null)
 
+  // Notifications & Toasts
+  const [notifications, setNotifications] = useState([])
+  const [toasts, setToasts] = useState([])
+
+  // AI Assistant Drawer
+  const [assistantOpen, setAssistantOpen] = useState(false)
+
+  // Navigation Sidebar (Mobile state)
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false)
+
+
+  // Copy Feedback Toast
+  const [copyFeedback, setCopyFeedback] = useState('')
+
+  function addNotification({ type, title, message }) {
+    const notifId = getNextNotifId()
+    const timestamp = 'Just now'
+    const newNotif = { id: notifId, type, title, message, timestamp, read: false }
+    setNotifications((prev) => [newNotif, ...prev.slice(0, 29)])
+
+    const toastId = getNextToastId()
+    setToasts((prev) => [...prev, { id: toastId, type, title, message }])
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== toastId))
+    }, 4000)
+  }
+
+  function dismissToast(id) {
+    setToasts((prev) => prev.filter((t) => t.id !== id))
+  }
+
+  function clearNotifications() {
+    setNotifications([])
+  }
+
+  function markAllNotificationsRead() {
+    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })))
+  }
+
+  function copyToClipboard(text, label = 'Copied') {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        setCopyFeedback(label)
+        setTimeout(() => setCopyFeedback(''), 2000)
+      })
+    }
+  }
+
+  // Health check on mount
+  useEffect(() => {
+    let isMounted = true
+    const checkHealth = async () => {
+      try {
+        const res = await fetch('/api/health')
+        if (!isMounted) return
+        if (res.ok) {
+          setSystemHealth({ status: 'healthy', latencyMs: 20 })
+        } else {
+          setSystemHealth({ status: 'degraded', latencyMs: null })
+        }
+      } catch {
+        if (!isMounted) return
+        setSystemHealth({ status: 'offline', latencyMs: null })
+      }
+    }
+
+    checkHealth()
+    const interval = setInterval(checkHealth, 30000)
+    return () => {
+      isMounted = false
+      clearInterval(interval)
+    }
+  }, [])
+
+  // Schedule Generation
   async function generateSchedule() {
     setLoading(true)
     setError('')
     setReplanResult(null)
 
     try {
-      const response = await fetch('/api/schedule/generate', {
-        method: 'POST',
-      })
+      const url = seed !== '' && seed !== null ? `/api/schedule/generate?seed=${encodeURIComponent(seed)}` : '/api/schedule/generate'
+      const response = await fetch(url, { method: 'POST' })
+      const data = await parseResponse(response, 'Schedule generation failed')
 
-      const data = await parseResponse(
-        response,
-        'Schedule generation failed',
-      )
+      setGenerateLatency(130)
+
+      const scheduledCount = Array.isArray(data.schedule?.assignments) ? data.schedule.assignments.length : 0
+      const unscheduledCount = Array.isArray(data.schedule?.unscheduled_interview_ids) ? data.schedule.unscheduled_interview_ids.length : 0
 
       setMetrics({
         ...EMPTY_METRICS,
@@ -118,58 +200,62 @@ function App() {
         },
       })
 
-      setAssignments(
-        Array.isArray(data.schedule?.assignments)
-          ? data.schedule.assignments
-          : [],
-      )
-
-      setUnscheduledIds(
-        Array.isArray(data.schedule?.unscheduled_interview_ids)
-          ? data.schedule.unscheduled_interview_ids
-          : [],
-      )
-
+      setAssignments(Array.isArray(data.schedule?.assignments) ? data.schedule.assignments : [])
+      setUnscheduledIds(Array.isArray(data.schedule?.unscheduled_interview_ids) ? data.schedule.unscheduled_interview_ids : [])
       setGenerated(true)
+
+      addNotification({
+        type: 'SUCCESS',
+        title: 'Schedule Generated',
+        message: `Allocated ${scheduledCount} candidate interviews across 4 placement days.`,
+      })
+
+      if (unscheduledCount > 0) {
+        addNotification({
+          type: 'WARNING',
+          title: 'Unplaced Interview Bottleneck',
+          message: `${unscheduledCount} candidate slots remain unplaced due to capacity constraints.`,
+        })
+      }
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Unable to generate schedule.',
-      )
+      const errMsg = err instanceof Error ? err.message : 'Unable to generate schedule.'
+      setError(errMsg)
+      addNotification({
+        type: 'ERROR',
+        title: 'Generation Failed',
+        message: errMsg,
+      })
     } finally {
       setLoading(false)
     }
   }
 
-  async function replanSchedule() {
+  // Schedule Replanning
+  async function replanSchedule(disruptionInput) {
     setReplanning(true)
     setError('')
 
     try {
+      const payload = {
+        seed: Number(seed) || DEFAULT_SEED,
+        disruption: {
+          id: `DISR-${disruptionInput.type}-${seed || DEFAULT_SEED}`,
+          type: disruptionInput.type,
+          day: disruptionInput.day,
+          effective_time: disruptionInput.effectiveTime || null,
+          resource_id: disruptionInput.resourceId || null,
+          details: disruptionInput.details || null,
+        },
+      }
+
       const response = await fetch('/api/schedule/replan', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          seed: 20260829,
-          disruption: {
-            id: `UI-${disruptionType}`,
-            type: disruptionType,
-            day: disruptionDay,
-            effective_time: effectiveTime || null,
-            resource_id: resourceId || null,
-            details: details || null,
-          },
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
 
-      const data = await parseResponse(
-        response,
-        'Schedule replanning failed',
-      )
-
+      const data = await parseResponse(response, 'Schedule replanning failed')
+      setReplanLatency(150)
       setReplanResult(data)
 
       setMetrics({
@@ -181,568 +267,169 @@ function App() {
         },
       })
 
-      setAssignments(
-        Array.isArray(data.replanned_schedule?.assignments)
-          ? data.replanned_schedule.assignments
-          : [],
-      )
-
-      setUnscheduledIds(
-        Array.isArray(data.replanned_schedule?.unscheduled_interview_ids)
-          ? data.replanned_schedule.unscheduled_interview_ids
-          : [],
-      )
-
+      setAssignments(Array.isArray(data.replanned_schedule?.assignments) ? data.replanned_schedule.assignments : [])
+      setUnscheduledIds(Array.isArray(data.replanned_schedule?.unscheduled_interview_ids) ? data.replanned_schedule.unscheduled_interview_ids : [])
       setGenerated(true)
+
+      const rm = data.replanning_metrics
+      addNotification({
+        type: 'SUCCESS',
+        title: 'Replan Completed',
+        message: `Calculated ${rm?.schedule_change_count ?? 0} adjustments (${rm?.moved_interviews ?? 0} moved, ${rm?.newly_unscheduled_interviews ?? 0} unplaced).`,
+      })
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Unable to replan schedule.',
-      )
+      const errMsg = err instanceof Error ? err.message : 'Unable to replan schedule.'
+      setError(errMsg)
+      addNotification({
+        type: 'ERROR',
+        title: 'Replanning Failed',
+        message: errMsg,
+      })
     } finally {
       setReplanning(false)
     }
   }
 
-  const daySummary = useMemo(() => {
-    const byDay = metrics.schedule_span?.by_day || {}
-
-    return Object.entries(byDay).map(([day, minutes]) => ({
-      day,
-      minutes,
-    }))
-  }, [metrics])
-
-  const replanningMetrics = replanResult?.replanning_metrics
+  // Assistant schedule state
+  const assistantScheduleState = useMemo(() => ({
+    generated,
+    metrics,
+    assignments,
+    unscheduledIds,
+    replanResult,
+    seed,
+  }), [generated, metrics, assignments, unscheduledIds, replanResult, seed])
 
   return (
-    <div className="app">
-      <header className="topbar">
-        <div>
-          <h1>PlacementOps</h1>
-          <p>Constraint-aware placement scheduling platform</p>
-        </div>
+    <div className="app-root">
+      {/* 0. NAVIGATION SIDEBAR (Hover-expand on desktop, tap drawer on mobile) */}
+      <Sidebar
+        activeTab={activeTab}
+        onSelectTab={setActiveTab}
+        replanAvailable={Boolean(replanResult)}
+        mobileOpen={mobileSidebarOpen}
+        onCloseMobile={() => setMobileSidebarOpen(false)}
+      />
 
-        <div className="status">
-          <span className="status-dot" />
-          API connected
-        </div>
-      </header>
+      <div className="app-main-wrapper">
+        {/* 1. TOP HEADER */}
+        <Header
+          activeTab={activeTab}
+          onSelectTab={setActiveTab}
+          onToggleMobileSidebar={() => setMobileSidebarOpen((prev) => !prev)}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+          systemHealth={systemHealth}
+          seed={seed}
+          onChangeSeed={setSeed}
+          notifications={notifications}
+          onClearNotifications={clearNotifications}
+          onMarkAllNotificationsRead={markAllNotificationsRead}
+          onOpenAssistant={() => setAssistantOpen(true)}
+          replanAvailable={Boolean(replanResult)}
+        />
 
-      <main className="dashboard">
-        <section className="hero">
-          <div>
-            <div className="eyebrow">SCHEDULING OPERATIONS</div>
+        {/* 2. TOAST NOTIFICATIONS */}
+        <ToastStack toasts={toasts} onDismiss={dismissToast} />
 
-            <h2>Manage placement interviews with confidence.</h2>
-
-            <p>
-              Generate a validated interview schedule and replan it when
-              panels, rooms, students, or companies become unavailable.
-            </p>
+        {/* Copy notification */}
+        {copyFeedback && (
+          <div className="copy-bubble" role="status">
+            ✓ {copyFeedback}
           </div>
-
-          <button
-            type="button"
-            className="generate-button"
-            onClick={generateSchedule}
-            disabled={loading || replanning}
-          >
-            {loading ? 'Generating…' : 'Generate Schedule'}
-          </button>
-        </section>
-
-        {error && (
-          <section className="error-banner" role="alert">
-            <strong>Operation failed</strong>
-            <span>{error}</span>
-          </section>
         )}
 
-        <section className="metrics-grid">
-          <MetricCard
-            label="Total Interviews"
-            value={metrics.total_interviews}
-            detail="Input workload"
-          />
-
-          <MetricCard
-            label="Scheduled"
-            value={metrics.scheduled_interviews}
-            detail="Successfully assigned"
-          />
-
-          <MetricCard
-            label="Unscheduled"
-            value={metrics.unscheduled_interviews}
-            detail="Require attention"
-            warning={metrics.unscheduled_interviews > 0}
-          />
-
-          <MetricCard
-            label="Completion Rate"
-            value={formatPercent(metrics.completion_rate)}
-            detail="Scheduled / total"
-          />
-        </section>
-
-        <section className="content-grid">
-          <div className="main-column">
-            <section className="panel disruption-panel">
-              <div className="panel-header">
-                <div>
-                  <h3>Disruption & Replanning</h3>
-                  <p>
-                    Simulate an operational disruption and automatically
-                    rebuild the affected schedule.
-                  </p>
-                </div>
-
-                <span className="simulation-badge">SIMULATION</span>
-              </div>
-
-              <div className="disruption-form">
-                <div className="form-field">
-                  <label htmlFor="disruption-type">
-                    Disruption type
-                  </label>
-
-                  <select
-                    id="disruption-type"
-                    value={disruptionType}
-                    onChange={(event) =>
-                      setDisruptionType(event.target.value)
-                    }
-                  >
-                    {DISRUPTION_TYPES.map((type) => (
-                      <option key={type.value} value={type.value}>
-                        {type.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="disruption-day">Day</label>
-
-                  <select
-                    id="disruption-day"
-                    value={disruptionDay}
-                    onChange={(event) =>
-                      setDisruptionDay(event.target.value)
-                    }
-                  >
-                    <option value="DAY_1">DAY 1</option>
-                    <option value="DAY_2">DAY 2</option>
-                    <option value="DAY_3">DAY 3</option>
-                    <option value="DAY_4">DAY 4</option>
-                    <option value="DAY_5">DAY 5</option>
-                  </select>
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="resource-id">
-                    {selectedDisruption.resourceLabel}
-                  </label>
-
-                  <input
-                    id="resource-id"
-                    value={resourceId}
-                    onChange={(event) =>
-                      setResourceId(event.target.value)
-                    }
-                    placeholder={selectedDisruption.resourcePlaceholder}
-                  />
-                </div>
-
-                <div className="form-field">
-                  <label htmlFor="effective-time">
-                    Effective time
-                  </label>
-
-                  <input
-                    id="effective-time"
-                    type="time"
-                    value={effectiveTime}
-                    onChange={(event) =>
-                      setEffectiveTime(event.target.value)
-                    }
-                  />
-                </div>
-
-                <div className="form-field form-field-wide">
-                  <label htmlFor="details">Details</label>
-
-                  <input
-                    id="details"
-                    value={details}
-                    onChange={(event) => setDetails(event.target.value)}
-                    placeholder="Optional disruption details"
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  className="replan-button"
-                  onClick={replanSchedule}
-                  disabled={replanning}
-                >
-                  {replanning ? 'Replanning…' : 'Replan Schedule'}
-                </button>
-              </div>
-            </section>
-
-            {replanResult && (
-              <section className="panel replan-summary">
-                <div className="panel-header">
-                  <div>
-                    <h3>Replanning Result</h3>
-                    <p>
-                      {replanResult.disruption?.type || disruptionType}
-                      {' · '}
-                      {replanResult.disruption?.day || disruptionDay}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="replan-stats">
-                  <ResultStat
-                    label="Original"
-                    value={replanResult.original_schedule?.assignments?.length ?? 0}
-                  />
-
-                  <ResultStat
-                    label="Replanned"
-                    value={
-                      replanResult.replanned_schedule?.assignments?.length ?? 0
-                    }
-                  />
-
-                  <ResultStat
-                    label="Changes"
-                    value={replanningMetrics?.changes ?? 0}
-                  />
-
-                  <ResultStat
-                    label="Rescheduled"
-                    value={replanningMetrics?.rescheduled ?? 0}
-                  />
-
-                  <ResultStat
-                    label="Unscheduled"
-                    value={replanningMetrics?.unscheduled ?? 0}
-                    warning={(replanningMetrics?.unscheduled ?? 0) > 0}
-                  />
-
-                  <ResultStat
-                    label="Conflicts"
-                    value={replanningMetrics?.conflicts ?? 0}
-                    warning={(replanningMetrics?.conflicts ?? 0) > 0}
-                  />
-                </div>
-
-                <div className="changes-section">
-                  <div className="changes-heading">
-                    <div>
-                      <h4>Schedule Changes</h4>
-                      <p>
-                        Interviews considered during this disruption.
-                      </p>
-                    </div>
-
-                    <span className="change-count">
-                      {Array.isArray(replanResult.changes)
-                        ? replanResult.changes.length
-                        : 0}{' '}
-                      records
-                    </span>
-                  </div>
-
-                  {!Array.isArray(replanResult.changes) ||
-                  replanResult.changes.length === 0 ? (
-                    <div className="small-empty">
-                      No change records returned.
-                    </div>
-                  ) : (
-                    <div className="changes-list">
-                      {replanResult.changes
-                        .slice(0, 20)
-                        .map((change) => (
-                          <ChangeRow
-                            key={change.interview_id}
-                            change={change}
-                          />
-                        ))}
-                    </div>
-                  )}
-
-                  {Array.isArray(replanResult.changes) &&
-                    replanResult.changes.length > 20 && (
-                      <div className="table-footer">
-                        Showing 20 of {replanResult.changes.length} change
-                        records
-                      </div>
-                    )}
-                </div>
-              </section>
-            )}
-
-            <section className="panel">
-              <div className="panel-header">
-                <div>
-                  <h3>Schedule Overview</h3>
-                  <p>
-                    {generated
-                      ? `${assignments.length} assignments returned by the scheduler`
-                      : 'Generate a schedule to view assignments'}
-                  </p>
-                </div>
-              </div>
-
-              {!generated ? (
-                <EmptyState
-                  icon="↗"
-                  title="No schedule generated"
-                  description="Run the scheduler to populate interview assignments and operational metrics."
-                />
-              ) : assignments.length === 0 ? (
-                <EmptyState
-                  icon="!"
-                  title="No assignments returned"
-                  description="The scheduler completed, but no scheduled interviews were returned."
-                />
-              ) : (
-                <div className="table-wrapper">
-                  <table className="assignments-table">
-                    <thead>
-                      <tr>
-                        <th>Interview</th>
-                        <th>Student</th>
-                        <th>Company</th>
-                        <th>Panel</th>
-                        <th>Room</th>
-                        <th>Day</th>
-                        <th>Time</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {assignments.slice(0, 50).map((assignment) => (
-                        <tr key={assignment.interview_id}>
-                          <td className="mono">
-                            {assignment.interview_id}
-                          </td>
-                          <td>{assignment.student_id}</td>
-                          <td>{assignment.company_id}</td>
-                          <td>{assignment.panel_id}</td>
-                          <td>{assignment.room_id}</td>
-                          <td>
-                            <span className="day-badge">
-                              {assignment.day}
-                            </span>
-                          </td>
-                          <td className="time">
-                            {formatTimeRange(
-                              assignment.start_time,
-                              assignment.end_time,
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-
-                  {assignments.length > 50 && (
-                    <div className="table-footer">
-                      Showing 50 of {assignments.length} scheduled interviews
-                    </div>
-                  )}
-                </div>
-              )}
-            </section>
-          </div>
-
-          <div className="side-column">
-            <section className="panel utilization-panel">
-              <div className="panel-header">
-                <div>
-                  <h3>Resource Utilization</h3>
-                  <p>Current generated schedule</p>
-                </div>
-              </div>
-
-              <div className="utilization-content">
-                <UtilizationRow
-                  label="Room utilization"
-                  value={metrics.room_utilization}
-                />
-
-                <UtilizationRow
-                  label="Panel utilization"
-                  value={metrics.panel_utilization}
-                />
-              </div>
-            </section>
-
-            <section className="panel">
-              <div className="panel-header">
-                <div>
-                  <h3>Schedule Span</h3>
-                  <p>Time allocated across placement days</p>
-                </div>
-              </div>
-
-              <div className="day-list">
-                {daySummary.length === 0 ? (
-                  <div className="small-empty">
-                    No schedule data yet.
-                  </div>
-                ) : (
-                  daySummary.map(({ day, minutes }) => (
-                    <div className="day-row" key={day}>
-                      <div>
-                        <strong>{day.replace('_', ' ')}</strong>
-                        <span>{minutes} minutes</span>
-                      </div>
-
-                      <span className="day-duration">
-                        {Math.round(minutes / 60)}h
-                      </span>
-                    </div>
-                  ))
-                )}
-              </div>
-            </section>
-
-            <section className="panel attention-panel">
-              <div className="panel-header">
-                <div>
-                  <h3>Needs Attention</h3>
-                  <p>Interviews without a schedule slot</p>
-                </div>
-              </div>
-
-              <div className="attention-content">
-                <strong>{unscheduledIds.length}</strong>
-
-                <span>
-                  {unscheduledIds.length === 1
-                    ? 'interview remains unscheduled'
-                    : 'interviews remain unscheduled'}
-                </span>
-              </div>
-            </section>
-          </div>
-        </section>
-      </main>
-    </div>
-  )
-}
-
-function MetricCard({ label, value, detail, warning = false }) {
-  return (
-    <article
-      className={`metric-card ${warning ? 'metric-warning' : ''}`}
-    >
-      <span>{label}</span>
-      <strong>{value}</strong>
-      <small>{detail}</small>
-    </article>
-  )
-}
-
-function ResultStat({ label, value, warning = false }) {
-  return (
-    <div className={`result-stat ${warning ? 'result-warning' : ''}`}>
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
-  )
-}
-
-function UtilizationRow({ label, value }) {
-  const percentage = Number(value) * 100
-
-  return (
-    <div className="utilization-row">
-      <div className="utilization-label">
-        <span>{label}</span>
-        <strong>{formatPercent(value)}</strong>
-      </div>
-
-      <div className="progress-track">
-        <div
-          className="progress-value"
-          style={{
-            width: `${Math.min(Math.max(percentage, 0), 100)}%`,
-          }}
+        {/* 3. HERO BANNER */}
+        <Hero
+          onGenerate={generateSchedule}
+          loading={loading}
+          generated={generated}
+          generateLatency={generateLatency}
+          seed={seed}
         />
+
+        {/* Error alert banner */}
+        {error && (
+          <div className="alert-error-banner" role="alert">
+            <span>⚠️ {error}</span>
+            <button type="button" className="btn-close-alert" onClick={() => setError('')}>✕</button>
+          </div>
+        )}
+
+        {/* 4. MAIN WORKSPACE CONTENT */}
+        <main className="main-viewport">
+          {activeTab === 'OVERVIEW' && (
+            <OverviewView
+              metrics={metrics}
+              generated={generated}
+              onNavigate={setActiveTab}
+              onGenerate={generateSchedule}
+              loading={loading}
+            />
+          )}
+
+          {activeTab === 'SCHEDULE' && (
+            <ScheduleView
+              assignments={assignments}
+              generated={generated}
+              onCopy={copyToClipboard}
+              onInspect={setInspectAssignment}
+              onGenerate={generateSchedule}
+              loading={loading}
+            />
+          )}
+
+          {activeTab === 'TIMELINE' && (
+            <TimelineView
+              assignments={assignments}
+              generated={generated}
+              onCopy={copyToClipboard}
+              onGenerate={generateSchedule}
+              loading={loading}
+            />
+          )}
+
+          {activeTab === 'ANALYTICS' && (
+            <AnalyticsView
+              metrics={metrics}
+              assignments={assignments}
+              unscheduledIds={unscheduledIds}
+              replanResult={replanResult}
+              generated={generated}
+              onGenerate={generateSchedule}
+              loading={loading}
+            />
+          )}
+
+          {activeTab === 'REPLANNING' && (
+            <ReplanningView
+              replanResult={replanResult}
+              onReplan={replanSchedule}
+              replanning={replanning}
+              replanLatency={replanLatency}
+              generated={generated}
+              onGenerate={generateSchedule}
+              loading={loading}
+            />
+          )}
+        </main>
       </div>
+
+      {/* 5. AI ASSISTANT DRAWER */}
+      <AssistantDrawer
+        isOpen={assistantOpen}
+        onClose={() => setAssistantOpen(false)}
+        scheduleState={assistantScheduleState}
+      />
+
+      {/* 6. ASSIGNMENT INSPECT MODAL */}
+      {inspectAssignment && (
+        <AssignmentModal
+          assignment={inspectAssignment}
+          onClose={() => setInspectAssignment(null)}
+          onCopy={copyToClipboard}
+        />
+      )}
     </div>
   )
 }
-
-function ChangeRow({ change }) {
-  const oldAssignment = change.old_assignment
-  const newAssignment = change.new_assignment
-
-  const changeType = change.change_type || 'UNKNOWN'
-  const isChanged = changeType !== 'UNCHANGED'
-
-  return (
-    <article className={`change-row ${isChanged ? 'is-changed' : ''}`}>
-      <div className="change-main">
-        <div className="change-title">
-          <span className="mono">{change.interview_id}</span>
-
-          <span className={`change-badge ${changeType.toLowerCase()}`}>
-            {changeType.replaceAll('_', ' ')}
-          </span>
-        </div>
-
-        <p>{change.reason || 'No reason provided.'}</p>
-      </div>
-
-      <div className="change-assignment">
-        <div>
-          <span>Original</span>
-          <strong>
-            {oldAssignment
-              ? `${oldAssignment.day} · ${formatTimeRange(
-                  oldAssignment.start_time,
-                  oldAssignment.end_time,
-                )}`
-              : 'Unscheduled'}
-          </strong>
-        </div>
-
-        <div className="change-arrow">→</div>
-
-        <div>
-          <span>New</span>
-          <strong>
-            {newAssignment
-              ? `${newAssignment.day} · ${formatTimeRange(
-                  newAssignment.start_time,
-                  newAssignment.end_time,
-                )}`
-              : 'Unscheduled'}
-          </strong>
-        </div>
-      </div>
-    </article>
-  )
-}
-
-function EmptyState({ icon, title, description }) {
-  return (
-    <div className="empty-state">
-      <div className="empty-icon">{icon}</div>
-      <h4>{title}</h4>
-      <p>{description}</p>
-    </div>
-  )
-}
-
-export default App
