@@ -5,12 +5,12 @@ import Hero from './components/layout/Hero'
 
 import OverviewView from './components/overview/OverviewView'
 import ScheduleView from './components/schedule/ScheduleView'
-import TimelineView from './components/timeline/TimelineView'
-import AnalyticsView from './components/analytics/AnalyticsView'
+import TimelineView from './components/Timeline/TimelineView'
+import AnalyticsView from './components/Analytics/AnalyticsView'
 import ReplanningView from './components/replanning/ReplanningView'
-import ToastStack from './components/notifications/ToastStack'
-import AssistantDrawer from './components/assistant/AssistantDrawer'
-import AssignmentModal from './components/timeline/AssignmentModal'
+import ToastStack from './components/Notifications/ToastStack'
+import AssistantDrawer from './components/Assistant/AssistantDrawer'
+import AssignmentModal from './components/Timeline/AssignmentModal'
 import './App.css'
 
 const DEFAULT_SEED = 20260829
