@@ -187,9 +187,12 @@ export default function App() {
         ? `${API_BASE_URL}/schedule/generate?seed=${encodeURIComponent(seed)}`
         : `${API_BASE_URL}/schedule/generate`
 
-      const response = await fetch(url)
-      const data = await parseResponse(response, 'Schedule generation failed')
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
 
+      const data = await parseResponse(response, 'Schedule generation failed')
       setGenerateLatency(130)
 
       const scheduledCount = Array.isArray(data.schedule?.assignments) ? data.schedule.assignments.length : 0
