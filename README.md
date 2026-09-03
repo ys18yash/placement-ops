@@ -2,465 +2,404 @@
 
 ## Deterministic Placement Scheduling Engine
 
-**PlacementOps is a constraint-aware interview scheduling and
-deterministic replanning platform built for high-volume campus placement
-operations.**
+PlacementOps is a constraint-aware interview scheduling and deterministic replanning platform built for high-volume campus placement operations.
 
-It models placement week across **students, companies, interviewer
-panels, rooms, availability windows, and placement days**, then
-generates a reproducible schedule and replans it when disruptions occur.
+### Video Walkthrough
 
-**[Live
-Demo](https://placement-ops-final-qxu31vmcd-yashsharma23csds-2811s-projects.vercel.app/)
-· [GitHub](https://github.com/ys18yash/placement-ops) · [API
-Docs](https://placement-ops-final-qxu31vmcd-yashsharma23csds-2811s-projects.vercel.app/)**
+**Main project walkthrough:**  
+https://youtu.be/PpCkmrgLxgI
 
-### The System at a Glance
+The walkthrough demonstrates the PlacementOps workflow, scheduling engine, operations console, analytics, and disruption-aware replanning.
 
-  Scale                            Result
-  ------------------------ --------------
-  Candidates                      **800**
-  Companies                        **35**
-  Interview Panels                 **85**
-  Interview Rooms                  **20**
-  Interview Requests              **859**
-  Placement Days                    **4**
-  Scheduled Interviews            **476**
-  Unscheduled Interviews          **383**
-  Completion Rate              **55.41%**
-  Schedule Generation        **\~130 ms**
-  Scheduling Conflicts              **0**
+### Project Scale
+
+| Metric | Value |
+|---|---:|
+| Students | 800 |
+| Companies | 35 |
+| Interview Panels | 85 |
+| Rooms | 20 |
+| Interview Requests | 859 |
+| Placement Days | 4 |
+| Scheduled Interviews | 476 |
+| Unscheduled Interviews | 383 |
+| Completion Rate | 55.41% |
+| Scheduler Runtime | ~130 ms |
+| Scheduling Conflicts | 0 |
 
 ### What Makes PlacementOps Interesting
 
-**Constraint-aware scheduling**\
-Allocates interviews while respecting student availability, company day
-constraints, interviewer-panel capacity, room capacity, operating
-windows, and overlap rules.
+- **Constraint-aware scheduling** — handles room, panel, student, company, availability, and operating-hour constraints.
+- **Deterministic execution** — the same input produces the same schedule.
+- **Deterministic replanning** — disruptions are handled without rebuilding the system around random decisions.
+- **Performance-focused engine** — optimized using resource indexes, incremental state, pruning, and short-circuit validation.
+- **Operations-focused interface** — provides a practical console for monitoring and managing placement activity.
 
-**Deterministic execution**\
-The same dataset and seed produce the same schedule, making results
-reproducible, testable, and easy to reason about.
-
-**Deterministic replanning**\
-Operational disruptions such as room outages, panel unavailability,
-company delays, and student withdrawals trigger a new valid schedule
-without discarding the scheduling constraints.
-
-**Performance-focused engine**\
-The scheduler uses indexed resource occupancy, precomputed availability,
-incremental scoring, and safe candidate pruning to avoid repeated linear
-scans.
-
-**Operations-focused interface**\
-The frontend provides schedule exploration, a visual timeline,
-operational analytics, disruption simulation, replanning impact
-analysis, notifications, and a grounded Gemini assistant.
+---
 
 ## The Problem
 
-Scheduling a campus placement week is not simply a matter of assigning
-interviews to available time slots.
+Campus placement interview scheduling is a constrained resource-allocation problem.
 
-With hundreds of candidates, multiple companies, interviewer panels,
-rooms, placement days, and availability windows, every assignment
-consumes several shared resources at once. A decision that is valid in
-isolation can make a later interview impossible to schedule.
+A realistic schedule must coordinate:
 
-For PlacementOps, an interview can only be accepted when its complete
-assignment is feasible across the relevant dimensions:
+- Student availability
+- Company interview requirements
+- Interview panel availability
+- Room availability
+- Daily operating hours
+- Student daily interview limits
+- Panel daily interview limits
+- Company scheduling limits
+- Existing assignments
+- Disruptions that occur after scheduling
 
-``` text
-                 Interview Request
-                        │
-          ┌─────────────┼─────────────┐
-          ↓             ↓             ↓
-      Candidate      Company       Resources
-      availability   day rules     panel + room
-          │             │             │
-          └─────────────┼─────────────┘
-                        ↓
-                 Time-window check
-                        ↓
-                Conflict validation
-                        ↓
-                 Valid assignment
-```
+The problem becomes more difficult when a schedule is already active and something changes.
+
+Examples include:
+
+- A room becoming unavailable
+- A panel dropping out
+- A company being delayed
+- A student withdrawing
+
+A useful system therefore needs to do more than generate an initial timetable. It must also **recover from operational disruptions while preserving unaffected work**.
+
+---
 
 ## The Solution
 
-PlacementOps is designed as a deterministic scheduling system that
-builds, validates, and continuously adapts a placement-week schedule.
+PlacementOps treats scheduling as an operational loop:
 
-Rather than treating an interview as an isolated calendar event,
-PlacementOps assigns each interview across the full set of scheduling
-dimensions:
+1. Generate an initial schedule.
+2. Validate the schedule against hard constraints.
+3. Detect and process disruptions.
+4. Replan affected work deterministically.
+5. Preserve unaffected assignments whenever possible.
+6. Expose the resulting state through an operations console.
+7. Provide analytics and AI-assisted interpretation.
 
-``` text
-Interview
-   │
-   ├── Candidate
-   ├── Company
-   ├── Placement Day
-   ├── Time Window
-   ├── Interview Panel
-   └── Room
-```
+The result is a system that combines a deterministic scheduling engine with a practical operations layer.
 
-Each candidate assignment is evaluated against the constraints that
-apply to all of these resources before it can become part of the
-schedule.
+---
 
 ## Key Capabilities
 
-PlacementOps combines deterministic scheduling, disruption recovery, and
-operational analysis into a single placement-week workflow.
+### Schedule Generation
+
+- High-volume interview scheduling
+- Deterministic candidate generation
+- Hard constraint validation
+- Resource-aware assignment
+- Deterministic tie-breaking
+- Explicit unscheduled outcomes
 
 ### Disruption & Replanning
 
-**Deterministic Replanning**\
-Adapts the schedule to operational changes while preserving the same
-scheduling constraints used during initial generation.
+Supported disruption categories include:
 
-Supported disruptions:
+- `ROOM_UNAVAILABLE`
+- `PANEL_UNAVAILABLE`
+- `COMPANY_DELAY`
+- `STUDENT_WITHDRAWAL`
 
-  ---------------------------------------------------------------------
-  Disruption                         Example
-  ---------------------------------- ----------------------------------
-  **Room Unavailable**               A scheduled interview room becomes
-                                     unavailable.
+Replanning:
 
-  **Panel Unavailable**              An interviewer panel can no longer
-                                     participate.
+1. Identifies affected assignments.
+2. Removes or adjusts impacted work.
+3. Preserves unaffected assignments.
+4. Searches for feasible alternatives.
+5. Validates the final schedule.
+6. Reports what changed.
 
-  **Company Delay**                  A company changes when its
-                                     interviews can begin.
+### Schedule Exploration
 
-  **Student Withdrawal**             A candidate withdraws from the
-                                     placement process.
-  ---------------------------------------------------------------------
+The frontend provides:
 
-**Impact Classification**\
-Every affected interview is explicitly classified as:
+- Schedule overview
+- Day-based schedule exploration
+- Timeline visualization
+- Assignment details
+- Unscheduled interview inspection
+- Replanning controls
+- Operational notifications
 
-``` text
-RESCHEDULED
-UNSCHEDULED
-UNCHANGED
-```
+### Analytics
 
-**Before → After Analysis**\
-For affected assignments, the system exposes the original assignment,
-the replanned assignment, and the reason associated with the change
-where the available data supports it.
+The console surfaces scheduling and capacity information so operators can understand:
 
-**Post-Replan Validation**\
-The resulting schedule is checked for assignment integrity,
-resource/time conflicts, interview accounting, and disruption-specific
-conditions before it is returned.
+- Scheduling completion
+- Resource utilization
+- Company distribution
+- Panel workload
+- Room workload
+- Unscheduled demand
+- Replanning impact
 
 ### AI Assistance
 
-**Grounded Gemini Assistant**\
-Ask natural-language questions about the current scheduling state,
-including schedule counts, workload distribution, resource utilization,
-interview details, and replanning results.
+PlacementOps also includes a Gemini-powered assistant that can answer questions about the current placement state while keeping deterministic scheduling logic separate from AI interpretation.
 
-The assistant is grounded in structured PlacementOps data. Exact
-operational facts are derived from the application's scheduling state
-rather than invented by the language model.
-
-**Streaming Responses**\
-Gemini responses are delivered incrementally to the interface through
-the application's streaming assistant pipeline.
+---
 
 ## System Architecture
 
-PlacementOps is organized as a layered system where the frontend, API,
-scheduling engine, replanning logic, analytics, and AI assistant have
-clear responsibilities.
-
-``` text
-                         ┌────────────────────────────┐
-                         │     React Operations UI     │
-                         │                            │
-                         │  Schedule · Timeline       │
-                         │  Analytics · Replanning    │
-                         │  Assistant · Notifications │
-                         └──────────────┬─────────────┘
-                                        │
-                              HTTP / SSE │
-                                        ▼
-                         ┌────────────────────────────┐
-                         │       FastAPI Backend      │
-                         │                            │
-                         │  Validation · Services     │
-                         │  Schedule APIs · Assistant │
-                         └───────┬─────────┬──────────┘
-                                 │         │
-                    ┌────────────┘         └─────────────┐
-                    ▼                                    ▼
-          ┌───────────────────┐                ┌───────────────────┐
-          │ Scheduling Engine │                │ Replanning Engine │
-          │                   │                │                   │
-          │ Ordering          │                │ Disruptions       │
-          │ Candidate search  │                │ Affected jobs     │
-          │ Constraints       │                │ Rescheduling      │
-          │ Scoring           │                │ Validation        │
-          └─────────┬─────────┘                └─────────┬─────────┘
-                    │                                    │
-                    └────────────────┬───────────────────┘
-                                     ▼
-                           ┌────────────────────┐
-                           │ Placement Dataset  │
-                           │                    │
-                           │ Students           │
-                           │ Companies          │
-                           │ Panels             │
-                           │ Rooms              │
-                           │ Interviews         │
-                           │ Availability       │
-                           └────────────────────┘
-
-                                      AI
-                                       │
-                                       ▼
-                              ┌─────────────────┐
-                              │   Google Gemini │
-                              │                 │
-                              │ Natural-language│
-                              │ assistance      │
-                              └─────────────────┘
+```text
+                         PlacementOps
+                              |
+                +-------------+-------------+
+                |                           |
+          React Operations UI          AI Assistant
+                |                           |
+                |                      Gemini API
+                |                           |
+                +-------------+-------------+
+                              |
+                           FastAPI
+                              |
+             +----------------+----------------+
+             |                                 |
+       Scheduling Engine                 Replanning Engine
+             |                                 |
+             +----------------+----------------+
+                              |
+                        Placement Data
+          Students | Companies | Panels | Rooms
+                    Interviews | Availability
 ```
 
-### Engineering Boundaries
+### Architecture Boundaries
 
-  Boundary        Responsibility
-  --------------- ------------------------------------------
-  **Frontend**    Presentation and user interaction
-  **API**         Validation and application orchestration
-  **Scheduler**   Deterministic assignment decisions
-  **Replanner**   Deterministic disruption recovery
-  **Gemini**      Natural-language interpretation
+**Frontend**
 
-This separation keeps the core scheduling system deterministic and
-testable while still allowing the application to provide a modern
-operational interface and natural-language assistant.
+Responsible for:
 
-------------------------------------------------------------------------
+- Operational visualization
+- User interactions
+- Schedule exploration
+- Replanning controls
+- Analytics presentation
+- Assistant interaction
+
+**Backend**
+
+Responsible for:
+
+- API validation
+- Scheduling
+- Replanning
+- Schedule integrity
+- Analytics data
+- AI orchestration
+
+**Scheduling Engine**
+
+Responsible for deterministic assignment decisions and constraint enforcement.
+
+**AI Assistant**
+
+Responsible for natural-language interpretation and explanation. It does not replace the deterministic scheduling engine.
+
+---
 
 ## Scheduling Engine
 
-The scheduling engine is the core of PlacementOps.
+PlacementOps uses a deterministic heuristic scheduling strategy.
 
-It builds the placement-week schedule incrementally by evaluating
-feasible assignments, applying hard constraints, scoring valid
-candidates, and selecting the result deterministically.
+### 1. Candidate Generation
 
-It is a **deterministic heuristic scheduler**, not a claim of globally
-optimal scheduling.
+The engine evaluates possible combinations of:
 
-### Performance Optimization
+- Day
+- Time slot
+- Panel
+- Room
 
-The original implementation spent substantial time repeatedly scanning
-existing assignments and comparing large numbers of intervals.
+for each interview request.
 
-Profiling identified repeated conflict checks and interval comparisons
-as major cost centers.
+### 2. Hard Constraints
 
-The optimized implementation reduces this work through:
+Candidates are rejected when they violate constraints such as:
 
-  ---------------------------------------------------------------------
-  Optimization                       Effect
-  ---------------------------------- ----------------------------------
-  **Resource occupancy indexes**     Avoid repeated global schedule
-                                     scans.
+- Student conflicts
+- Panel conflicts
+- Room conflicts
+- Availability restrictions
+- Operating hours
+- Daily resource limits
+- Existing schedule assignments
 
-  **Precomputed availability**       Reuse static availability
-                                     information.
+### 3. Scoring
 
-  **Incremental counters**           Avoid repeatedly recomputing
-                                     scheduling state.
+Feasible candidates are ranked using deterministic scheduling preferences.
 
-  **Safe candidate pruning**         Remove impossible candidates
-                                     before expensive checks.
+### 4. Tie-Breaking
 
-  **Short-circuit checks**           Stop validation as soon as a
-                                     constraint fails.
+Stable ordering ensures reproducible results when multiple candidates have equivalent scores.
 
-  **On-demand best-candidate         Avoid unnecessary materialization
-  selection**                        and sorting of the complete
-                                     feasible candidate set.
-  ---------------------------------------------------------------------
+### 5. Incremental State
 
-### Deterministic Equivalence
+The optimized implementation maintains scheduling state incrementally rather than repeatedly scanning the complete schedule.
 
-The optimized scheduler was compared against the previous implementation
-on the canonical dataset.
+This includes:
 
-``` text
-Assignment sequence      476 / 476 identical
-Unscheduled interview IDs       identical
-Candidate scoring         96,421 / 96,421 equivalent
-Scheduling conflicts                    0
-```
+- Resource occupancy indexes
+- Student/company/panel/room daily counts
+- Precomputed static availability
+- Hierarchical pruning
+- Short-circuit constraint validation
+- On-demand best-candidate selection
 
-The resulting schedule therefore remains behaviorally identical while
-the engine executes substantially faster.
+### Determinism
+
+The optimization was designed to preserve the original scheduler's behavior.
+
+For the canonical dataset:
+
+- All **476 assignment tuples** matched the reference implementation.
+- The unscheduled interview ID sequence matched exactly.
+- **96,421 / 96,421** candidate scores matched.
+
+This means the performance improvements changed the implementation strategy without changing scheduling behavior.
+
+---
 
 ## Replanning & Disruption Recovery
 
-A placement schedule is not static.
+Replanning is treated as a first-class scheduling operation.
 
-During placement week, resources can become unavailable, interview
-windows can change, or a candidate can withdraw after the schedule has
-already been generated.
+### Workflow
 
-PlacementOps treats these events as **operational disruptions** and
-produces a new deterministic schedule state while preserving the
-scheduling constraints.
+```text
+Existing Schedule
+       |
+       v
+Disruption Detected
+       |
+       v
+Identify Affected Assignments
+       |
+       v
+Remove / Adjust Impacted Work
+       |
+       v
+Find Feasible Alternatives
+       |
+       v
+Validate Final Schedule
+       |
+       v
+Return Replanned Schedule
+```
 
-### Supported Disruptions
+The replanning process is designed to minimize unnecessary changes.
 
-  ---------------------------------------------------------------------
-  Disruption                         Effect
-  ---------------------------------- ----------------------------------
-  **Room Unavailable**               Removes a room from the affected
-                                     scheduling period.
+### Student Withdrawal Example
 
-  **Panel Unavailable**              Removes an interviewer panel from
-                                     the affected scheduling period.
+For the canonical end-to-end withdrawal scenario:
 
-  **Company Delay**                  Applies the configured timing
-                                     restriction to affected company
-                                     interviews.
+- Baseline scheduled: **476**
+- Replanned scheduled: **473**
+- Affected assignments: **3**
+- Remaining assignments for withdrawn student: **0**
+- Newly unscheduled interviews: **3**
 
-  **Student Withdrawal**             Removes the student's scheduled
-                                     interviews from the schedule.
-  ---------------------------------------------------------------------
+The final schedule is validated for assignment integrity, conflicts, accounting, and disruption postconditions.
+
+---
 
 ## Data Model & Dataset
 
-PlacementOps uses a deterministic synthetic dataset to model a
-high-volume campus placement week.
+The canonical seed is:
 
-The dataset represents the participants, organizations, interviewer
-resources, physical resources, interview demand, and time constraints
-required by the scheduling engine.
+```text
+20260829
+```
 
-### Canonical Result
+It contains:
 
-The canonical workload produces the following baseline result:
+- **800 students**
+- **35 companies**
+- **85 panels**
+- **20 rooms**
+- **859 interview requests**
+- **4 placement days**
 
-  Metric                       Result
-  ---------------------- ------------
-  Interview Requests          **859**
-  Scheduled                   **476**
-  Unscheduled                 **383**
-  Completion Rate          **55.41%**
-  Scheduling Conflicts          **0**
+Baseline scheduling produced:
 
-These values describe the canonical workload and provide a stable
-reference point for regression and performance testing.
+- **476 scheduled**
+- **383 unscheduled**
+- **55.41% completion**
+- **0 conflicts**
+
+The generated dataset is designed to create meaningful resource pressure rather than producing an unrealistically easy schedule.
+
+---
 
 ## API Design
 
-PlacementOps exposes a small FastAPI surface around the scheduling
-domain.
+The backend exposes the following primary endpoints:
 
-HTTP handlers validate requests and delegate the actual scheduling and
-replanning decisions to the backend services.
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/health` | Health check |
+| POST | `/schedule/generate` | Generate a schedule |
+| POST | `/schedule/replan` | Replan after a disruption |
+| POST | `/assistant/query` | Ask the AI assistant |
+| POST | `/assistant/stream` | Stream assistant responses |
 
-### API Surface
+FastAPI also exposes interactive API documentation at:
 
-  -----------------------------------------------------------------------
-  Method                  Endpoint                Purpose
-  ----------------------- ----------------------- -----------------------
-  `GET`                   `/health`               Backend health check
-
-  `POST`                  `/schedule/generate`    Generate the initial
-                                                  deterministic schedule
-
-  `POST`                  `/schedule/replan`      Replan an existing
-                                                  schedule after a
-                                                  disruption
-
-  `POST`                  `/assistant/query`      Return a grounded
-                                                  Gemini response
-
-  `POST`                  `/assistant/stream`     Stream Gemini responses
-                                                  grounded in
-                                                  PlacementOps data
-  -----------------------------------------------------------------------
-
-The API is intentionally small: the frontend interacts with a few
-focused operations rather than depending on internal scheduler
-implementation details.
-
-### API Documentation
-
-FastAPI provides interactive API documentation for development and
-testing.
-
-``` text
+```text
 /docs
 ```
 
-The generated documentation exposes the available endpoints, request
-schemas, and response models without requiring a separate API
-specification to be maintained manually.
+### Validation
+
+The API distinguishes between:
+
+- Malformed request validation
+- Domain-level scheduling/replanning validation
+
+Invalid payloads are rejected rather than silently producing an incorrect schedule.
+
+---
 
 ## Performance Engineering
 
-PlacementOps was optimized using a profile-driven approach.
+The scheduler was optimized after profiling the original implementation.
 
-The goal was not simply to make the scheduler faster, but to reduce
-repeated work while preserving the exact scheduling behavior of the
-canonical implementation.
+### Original Hotspots
 
-### Optimization Techniques
+Profiling identified expensive repeated work in:
 
-  ---------------------------------------------------------------------
-  Technique                          What Changed
-  ---------------------------------- ----------------------------------
-  **Resource occupancy indexes**     Existing assignments are indexed
-                                     by resource and placement day
-                                     instead of repeatedly scanning the
-                                     full schedule.
+- Existing conflict checks
+- Time-overlap checks
+- Candidate generation
+- Repeated scoring scans
+- Eager evaluation of all resource combinations
 
-  **Precomputed availability**       Static availability information is
-                                     prepared once and reused during
-                                     candidate evaluation.
+The original benchmark was approximately:
 
-  **Incremental state**              Company, panel, room, and student
-                                     scheduling state is updated as
-                                     assignments are accepted.
+- **72.85M function calls**
+- **~33.7 seconds**
 
-  **Safe candidate pruning**         Candidates that cannot satisfy
-                                     known constraints are discarded
-                                     before unnecessary checks.
+### Optimization Strategy
 
-  **Short-circuit validation**       Constraint evaluation stops as
-                                     soon as a candidate is known to be
-                                     invalid.
+The optimized implementation introduced:
 
-  **On-demand selection**            The scheduler tracks the best
-                                     feasible candidate without
-                                     unnecessarily materializing and
-                                     sorting every candidate.
-  ---------------------------------------------------------------------
+1. O(1) resource occupancy indexes.
+2. Incremental daily counters.
+3. Precomputed availability.
+4. Hierarchical safe pruning.
+5. Sequential short-circuit validation.
+6. On-demand best-candidate selection.
 
-These changes target the cost of candidate evaluation while leaving the
-scheduling policy unchanged.
+### Benchmark
 
-### Benchmark Result
+Five optimized benchmark runs:
 
-The optimized scheduler was benchmarked against the canonical dataset
-using the same deterministic input and configuration.
-
-Five runs produced:
-
-``` text
+```text
 0.1275 s
 0.1289 s
 0.1306 s
@@ -468,287 +407,310 @@ Five runs produced:
 0.1338 s
 ```
 
-Median runtime:
+Median:
 
-``` text
-~130 ms
+```text
+~0.1306 seconds
 ```
 
-The measured runtime is more than **99% lower** than the earlier
-implementation under the corresponding benchmark setup.
+This represents more than a **99% reduction** versus the earlier benchmark under the corresponding benchmark setup, while preserving exact canonical scheduling behavior.
 
-### Correctness During Optimization
-
-A faster scheduler is only useful if it still produces the correct
-result.
-
-The optimized implementation was compared with the previous
-implementation on the canonical dataset.
-
-``` text
-Scheduled assignments     476 / 476 identical
-Unscheduled interview IDs      identical
-Candidate scoring         96,421 / 96,421 equivalent
-Scheduling conflicts                   0
-```
-
-This provides a stronger validation than a runtime comparison alone:
-
-``` text
-Performance Improvement
-        +
-Behavioral Equivalence
-        ↓
-Accepted Optimization
-```
-
-### Result
-
-The final scheduler combines:
-
-**Constraint correctness · deterministic behavior · reproducible
-benchmarking · efficient candidate evaluation**
-
-with a measured canonical runtime of approximately **130 ms**.
-
-------------------------------------------------------------------------
+---
 
 ## Correctness, Testing & Validation
 
-Correctness is a core requirement of PlacementOps.
+The project includes automated tests covering:
 
-The system validates scheduling behavior at both the individual
-constraint level and the complete schedule level, with automated tests
-covering generation, replanning, API validation, and regression
-behavior.
+- Scheduling constraints
+- Schedule integrity
+- Conflict detection
+- Deterministic scheduling
+- Replanning validation
+- Disruption postconditions
+- API validation
+- End-to-end withdrawal behavior
+- Resource availability handling
 
-### Test Suite
+Latest known test suite:
 
-The current backend test suite contains:
-
-``` text
-57 total tests
+```text
+57 tests
 55 passed
 2 skipped
 ```
 
-The skipped cases were intentional and were not failing tests. The
-repository should be re-run before release so these figures match the
-exact published state.
+Additional validation confirmed:
+
+- 0 scheduling conflicts
+- 476 / 476 canonical assignments valid
+- Exact assignment equivalence after optimization
+- Dataset integrity preserved
+- No global mutable scheduler state
+- Student occupancy enforced across companies
+
+---
 
 ## Frontend & Operations Console
 
-PlacementOps includes a recruiter-facing operations console for
-exploring and managing the placement schedule.
+The PlacementOps frontend is designed as an operations console rather than a simple form-based demo.
 
-The interface is built around the state produced by the backend
-scheduling system. It does not contain an independent scheduling model
-or make scheduling decisions in the browser.
+### Main Areas
+
+- **Overview** — high-level placement metrics
+- **Schedule Explorer** — inspect scheduled interviews
+- **Timeline** — visualize daily interview activity
+- **Analytics** — understand demand and resource usage
+- **Replanning** — trigger disruption workflows
+- **Unscheduled** — inspect unresolved interview demand
+- **Assignment Details** — inspect individual assignments
+- **Notifications** — surface operational events
+
+The interface uses a **Midnight Cobalt + Ice** visual system and includes responsive navigation for different screen sizes.
+
+---
 
 ## AI Assistant & Gemini Integration
 
-PlacementOps includes a Gemini-powered assistant that provides a
-natural-language interface to the current scheduling state.
+The assistant uses Google Gemini as an interpretation layer around deterministic PlacementOps data.
 
-The assistant is deliberately separated from the scheduling engine:
+The backend provides structured context to the model so that responses can reference operational facts such as schedule state and resource information.
 
-> **PlacementOps makes scheduling decisions. Gemini helps operators
-> understand them.**
+### Design Principles
 
-## Project Structure & Code Organization
+- Scheduling remains deterministic.
+- AI does not directly modify scheduling state.
+- Gemini credentials remain server-side.
+- Streaming responses use Server-Sent Events.
+- Assistant failures are isolated from the core scheduling engine.
 
-PlacementOps is organized so that scheduling logic, API behavior, data
-generation, and frontend presentation remain separated.
+This separation keeps AI useful for natural-language interaction without making the core scheduling system dependent on probabilistic model output.
 
-``` text
+---
+
+## Project Structure
+
+```text
 placement-ops/
-│
 ├── backend/
 │   └── placementops/
-│       ├── api/
-│       │   ├── routes.py
-│       │   └── service.py
-│       │
-│       ├── dataset/
-│       │   └── generator.py
-│       │
+│       ├── app.py
+│       ├── assistant/
 │       ├── scheduling/
-│       │   ├── scheduler.py
-│       │   ├── constraints.py
-│       │   ├── replanner.py
-│       │   └── metrics.py
-│       │
-│       └── app.py
-│
+│       ├── models/
+│       └── ...
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
 │   │   └── ...
-│   │
 │   ├── package.json
-│   └── vite.config.*
-│
+│   └── vite.config.js
 ├── tests/
-│   ├── test_api.py
-│   ├── test_scheduling_replanner.py
-│   └── test_scheduling_replanning_metrics.py
-│
 ├── requirements.txt
-├── .gitignore
+├── .env.example
 └── README.md
 ```
 
+---
+
 ## Technology Stack
 
-PlacementOps uses a lightweight full-stack architecture with
-Python/FastAPI on the backend and React/Vite on the frontend.
+### Frontend
 
-### Why This Stack
+- React 19
+- Vite
+- JavaScript
+- CSS
 
-The stack is intentionally simple.
+### Backend
 
-The project does not introduce a large framework ecosystem around the
-scheduling engine. Each major technology has a focused responsibility:
-
-``` text
-React        → user interface
-Vite         → frontend tooling
-FastAPI      → application API
-Python       → scheduling domain
-Uvicorn      → application server
-Gemini       → natural-language interface
-unittest     → automated validation
-Git          → source control
-```
-
-This keeps the implementation approachable while leaving the scheduling
-engine independent from the presentation layer.
-
-------------------------------------------------------------------------
-
-## Local Development & Setup
-
-PlacementOps can be run locally as two processes:
-
-``` text
-React / Vite Frontend
-        │
-        │ HTTP
-        ▼
-FastAPI Backend
-        │
-        ▼
-PlacementOps Scheduling Engine
-```
-
-## API Usage & Example Workflow
-
-PlacementOps can be used through the FastAPI endpoints independently of
-the React frontend.
-
-The main operational workflow is:
-
-``` text
-Generate
-   ↓
-Inspect
-   ↓
-Disrupt
-   ↓
-Replan
-   ↓
-Analyze
-```
-
-## Deployment & Production Configuration
-
-PlacementOps is designed to separate the frontend deployment from the
-FastAPI backend.
-
-A practical production setup is:
-
-``` text
-GitHub
-  │
-  ├──────────────► Vercel
-  │                 React / Vite Frontend
-  │
-  └──────────────► Render
-                    FastAPI Backend
-                        │
-                        ▼
-                       Gemini
-```
-
-## Future Improvements
-
-PlacementOps is intentionally focused on the core placement scheduling
-and replanning workflow.
-
-Potential future improvements include:
-
-### Scheduling
-
--   stronger optimization objectives beyond the current heuristic
-    scoring
--   additional fairness constraints across candidates and resources
--   improved handling of multi-stage interview processes
--   larger-scale workload benchmarking
--   optional comparison with mathematical optimization approaches
-
-### Operations
-
--   persistent schedule storage
--   user authentication and role-based access
--   audit logs for operational changes
--   richer export formats
--   calendar and notification integrations
+- Python
+- FastAPI
+- Uvicorn
 
 ### AI
 
--   broader natural-language exploration of scheduling state
--   configurable assistant actions with explicit approval
--   richer context selection for complex operational questions
--   evaluation of assistant responses against deterministic application
-    facts
+- Google Gemini
 
-These improvements would extend the system while preserving its central
-design principle:
+### Testing & Engineering
 
-``` text
-deterministic scheduling state
-        +
-explicit operational controls
-        +
-AI-assisted interpretation
+- Python `unittest`
+- Git
+- GitHub
+
+---
+
+## Local Development & Setup
+
+### Prerequisites
+
+- Python 3.x
+- Node.js
+- npm
+
+### Backend
+
+From the repository root:
+
+```bash
+python -m uvicorn placementops.app:app --reload --app-dir backend
 ```
 
-------------------------------------------------------------------------
+The backend runs locally on:
+
+```text
+http://127.0.0.1:8000
+```
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The Vite development server proxies `/api` requests to the local FastAPI backend.
+
+### Environment Variables
+
+Create the backend environment configuration using:
+
+```text
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash
+```
+
+Never commit real credentials to Git.
+
+### Tests
+
+From the repository root:
+
+```powershell
+$env:PYTHONPATH="backend"
+python -m unittest discover -s tests -p "test_*.py" -v
+```
+
+---
+
+## API Usage & Example Workflow
+
+### Generate a Schedule
+
+```http
+POST /schedule/generate
+```
+
+The endpoint generates a deterministic schedule from the supplied placement data.
+
+### Replan a Schedule
+
+```http
+POST /schedule/replan
+```
+
+The request includes the current schedule and disruption information. The backend identifies affected assignments, replans where possible, and validates the final result.
+
+### Ask the Assistant
+
+```http
+POST /assistant/query
+```
+
+For streaming interaction:
+
+```http
+POST /assistant/stream
+```
+
+The frontend consumes the assistant response through the API layer.
+
+---
+
+## Deployment & Production Configuration
+
+### Frontend
+
+The frontend can be deployed to Vercel with:
+
+```text
+Root Directory: frontend
+```
+
+### Backend
+
+The FastAPI backend can be deployed to Render.
+
+Build command:
+
+```bash
+pip install -r requirements.txt
+```
+
+Start command:
+
+```bash
+uvicorn placementops.app:app --host 0.0.0.0 --port $PORT --app-dir backend
+```
+
+Production environment variables include:
+
+```text
+GEMINI_API_KEY
+GEMINI_MODEL
+```
+
+The deployed frontend should be configured to communicate with the deployed backend API.
+
+---
+
+## Future Improvements
+
+Potential extensions include:
+
+- More advanced optimization algorithms
+- Larger-scale stress testing
+- Additional disruption types
+- Richer operational analytics
+- Authentication and role-based access
+- Persistent schedule storage
+- Audit logs
+- More sophisticated AI-assisted reporting
+
+These are future improvements rather than requirements for the current deterministic scheduling workflow.
+
+---
 
 ## Project Links
 
-**Live Demo:**
-https://placement-ops-final-qxu31vmcd-yashsharma23csds-2811s-projects.vercel.app/\
-**GitHub:** https://github.com/ys18yash/placement-ops  
-**Video Walkthrough:** https://youtu.be/PpCkmrgLxgI\
-**API Docs:**
+### Video Walkthrough
+
+https://youtu.be/PpCkmrgLxgI
+
+### Live Demo
+
 https://placement-ops-final-qxu31vmcd-yashsharma23csds-2811s-projects.vercel.app/
 
-------------------------------------------------------------------------
+### GitHub
+
+https://github.com/ys18yash/placement-ops
+
+### API Documentation
+
+Available through the deployed backend's `/docs` endpoint.
+
+---
 
 ## License
 
-This project is available under the license included in the repository.
+This project is intended as a technical assessment and portfolio project.
 
-------------------------------------------------------------------------
+---
 
 ## Author
 
 **Yash Sharma**
 
-Software Engineering · Full-Stack Development · Backend · AI Integration
-
-PlacementOps was built as an engineering-focused scheduling system
-combining constraint-aware scheduling, deterministic replanning,
-performance optimization, API design, operational visualization, and
-grounded AI assistance.
+Software Engineering | Full-Stack Development | Backend | AI Integration
