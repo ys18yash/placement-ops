@@ -8,7 +8,6 @@ from pathlib import Path
 try:
     from dotenv import load_dotenv
 
-    # Locate project root .env and fallback files
     project_root = Path(__file__).resolve().parents[2]
     for env_filename in [".env", ".env.local", ".env.example"]:
         env_file = project_root / env_filename
@@ -30,9 +29,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://placement-ops-final-onlum8uxt-yashsharma23csds-2811s-projects.vercel.app",
-    ],
+    allow_origins=[],
+    allow_origin_regex=r"https://placement-ops-final(?:-[a-z0-9-]+)?-yashsharma23csds-2811s-projects\.vercel\.app",
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
