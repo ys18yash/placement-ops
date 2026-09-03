@@ -31,7 +31,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://placement-ops-final-osomazj4-yashsharma23csds-2811s-projects.vercel.app",
+        "https://placement-ops-final-onlum8uxt-yashsharma23csds-2811s-projects.vercel.app",
     ],
     allow_credentials=False,
     allow_methods=["*"],
