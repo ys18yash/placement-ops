@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '')
 const SUGGESTED_QUERIES = [
   'How many interviews are scheduled?',
   'Which room has the minimum utilization?',
@@ -113,10 +113,10 @@ export default function AssistantDrawer({
       has_replan: Boolean(replanResult),
       replan_summary: replanResult
         ? {
-            disruption: replanResult.disruption,
-            metrics: replanResult.replanning_metrics,
-            sample_changes: (replanResult.changes || []).slice(0, 10),
-          }
+          disruption: replanResult.disruption,
+          metrics: replanResult.replanning_metrics,
+          sample_changes: (replanResult.changes || []).slice(0, 10),
+        }
         : null,
     }
   }
@@ -154,7 +154,7 @@ export default function AssistantDrawer({
         .filter((m) => m.id !== 'welcome')
         .map((m) => ({ role: m.role, content: m.content }))
 
-      const response = await fetch('/api/assistant/stream', {
+      const response = await fetch(`${API_BASE_URL}/assistant/stream`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         signal: controller.signal,
@@ -225,10 +225,10 @@ export default function AssistantDrawer({
           prev.map((msg) =>
             msg.id === botMsgId && !msg.content
               ? {
-                  ...msg,
-                  content: 'PlacementOps Assistant is temporarily unavailable.',
-                  isError: true,
-                }
+                ...msg,
+                content: 'PlacementOps Assistant is temporarily unavailable.',
+                isError: true,
+              }
               : msg
           )
         )
@@ -243,10 +243,10 @@ export default function AssistantDrawer({
         prev.map((msg) =>
           msg.id === botMsgId
             ? {
-                ...msg,
-                content: 'PlacementOps Assistant is temporarily unavailable.',
-                isError: true,
-              }
+              ...msg,
+              content: 'PlacementOps Assistant is temporarily unavailable.',
+              isError: true,
+            }
             : msg
         )
       )

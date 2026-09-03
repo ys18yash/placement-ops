@@ -1,3 +1,4 @@
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '')
 import { useEffect, useMemo, useState } from 'react'
 import Header from './components/layout/Header'
 import Sidebar from './components/layout/Sidebar'
@@ -154,7 +155,7 @@ export default function App() {
     let isMounted = true
     const checkHealth = async () => {
       try {
-        const res = await fetch('/api/health')
+        const res = await fetch(`${API_BASE_URL}/health`)
         if (!isMounted) return
         if (res.ok) {
           setSystemHealth({ status: 'healthy', latencyMs: 20 })
@@ -182,8 +183,8 @@ export default function App() {
     setReplanResult(null)
 
     try {
-      const url = seed !== '' && seed !== null ? `/api/schedule/generate?seed=${encodeURIComponent(seed)}` : '/api/schedule/generate'
-      const response = await fetch(url, { method: 'POST' })
+      const url = seed !== '' && seed !== null ? `${API_BASE_URL}/schedule/generate?seed=${encodeURIComponent(seed)}`
+        : `${API_BASE_URL}/schedule/generate`
       const data = await parseResponse(response, 'Schedule generation failed')
 
       setGenerateLatency(130)
@@ -248,7 +249,7 @@ export default function App() {
         },
       }
 
-      const response = await fetch('/api/schedule/replan', {
+      const response = await fetch(`${API_BASE_URL}/schedule/replan`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
