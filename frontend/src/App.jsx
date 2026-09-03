@@ -183,8 +183,11 @@ export default function App() {
     setReplanResult(null)
 
     try {
-      const url = seed !== '' && seed !== null ? `${API_BASE_URL}/schedule/generate?seed=${encodeURIComponent(seed)}`
+      const url = seed !== '' && seed !== null
+        ? `${API_BASE_URL}/schedule/generate?seed=${encodeURIComponent(seed)}`
         : `${API_BASE_URL}/schedule/generate`
+
+      const response = await fetch(url)
       const data = await parseResponse(response, 'Schedule generation failed')
 
       setGenerateLatency(130)
